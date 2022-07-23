@@ -46,11 +46,17 @@ export class AuthService {
       const userId = await mockLogin(username, password);
       this.token = userId;
       await storageService.storage.set(USER_TOKEN_KEY, userId)
+      document.dispatchEvent(new Event(AUTH_CHANGE_EVENT))
       return true;
     } catch(e) {
       console.error(e);
       return false;
     }
+  }
+  async logout() {
+    this.token = '';
+    await storageService.storage.remove(USER_TOKEN_KEY);
+    document.dispatchEvent(new Event(AUTH_CHANGE_EVENT))
   }
 }
 
