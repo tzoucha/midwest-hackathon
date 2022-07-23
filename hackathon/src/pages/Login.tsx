@@ -13,7 +13,11 @@ export const LoginPage = () => {
     console.log("SIGN IN ATTEMPT", username, password)
     await services.authService.login(username, password);
     dismiss();
-    document.dispatchEvent(new Event(AUTH_CHANGE_EVENT))
+  }
+  const signInOnEnter = (e: any) => {
+    if(e.keyCode === 13) {
+      signIn();
+    }
   }
   return (<IonPage>
     <IonContent fullscreen>
@@ -23,9 +27,11 @@ export const LoginPage = () => {
             <IonCard>
               <IonCardHeader  style={{textAlign: 'center'}}><h1>Sign in</h1></IonCardHeader>
               <IonCardContent>
-                <IonInput value={username} placeholder="User Name" onIonChange={e => setUsername(e.detail.value!)} />
-                <IonInput type='password' value={password} placeholder='Password' onIonChange={e => setPassword(e.detail.value!)} />
-                <IonButton expand='full' shape='round' onClick={signIn}>Sign in</IonButton>
+                {/* <form onSubmit={signIn}> */}
+                  <IonInput value={username} placeholder="User Name" onIonChange={e => setUsername(e.detail.value!)} onKeyUp={signInOnEnter}/>
+                  <IonInput type='password' value={password} placeholder='Password' onIonChange={e => setPassword(e.detail.value!)} onKeyUp={signInOnEnter}/>
+                  <IonButton expand='full' shape='round' onClick={signIn}>Sign in</IonButton>
+                {/* </form> */}
               </IonCardContent>
             </IonCard>
           </IonCol>
