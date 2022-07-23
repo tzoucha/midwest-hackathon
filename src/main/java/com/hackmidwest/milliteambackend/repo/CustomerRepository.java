@@ -9,13 +9,12 @@ package com.hackmidwest.milliteambackend.repo;/*
  */
 
 import com.hackmidwest.milliteambackend.model.Customer;
-import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerRepository extends MongoRepository<Customer, String> {
   public Customer findByFirstName(String firstName);
-  public List<Customer> findByLastName(String lastName);
+  public Customer findByEmailAddressAndPassword(String emailAddress, String password);
 
 }

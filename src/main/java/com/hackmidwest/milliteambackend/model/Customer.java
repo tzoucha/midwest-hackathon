@@ -17,7 +17,7 @@ public class Customer {
   public String id;
   public String firstName;
   public String lastName;
-  public String hashedPassword;
+  public String password;
   public String profilePicture;
   public String emailAddress;
   public String addressLine1;
@@ -53,12 +53,12 @@ public class Customer {
     return this;
   }
 
-  public String getHashedPassword() {
-    return hashedPassword;
+  public String getPassword() {
+    return password;
   }
 
-  public Customer setHashedPassword(String hashedPassword) {
-    this.hashedPassword = hashedPassword;
+  public Customer setPassword(String password) {
+    this.password = password;
     return this;
   }
 
