@@ -13,6 +13,7 @@ import com.hackmidwest.milliteambackend.model.Transaction;
 import com.hackmidwest.milliteambackend.service.TransactionService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transactions")
+@CrossOrigin
 public class TransactionController {
   public TransactionService transactionService;
 

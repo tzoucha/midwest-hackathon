@@ -4,8 +4,10 @@ import { IonNote } from '@ionic/react';
 
 import { trash, checkbox } from 'ionicons/icons';
 import './pageStyles.css';
+import { useServices } from '../services/providers';
 
 const Profile: React.FC = () => {
+  const services = useServices();
 
   const pendingInvites = [{
     name: "One Piece",
@@ -59,7 +61,7 @@ const Profile: React.FC = () => {
               <IonInput readonly={readOnly} pattern="tel" value={phone} onIonChange={e => setPhone(e.detail.value!)}></IonInput>
             </IonItem>
             <div style={{ marginBottom: "10px", paddingLeft: "10px" }}>
-              {bio.map(k => <p>{k}</p>)}
+              {bio.map((k,i) => <p key={i}>{k}</p>)}
             </div>
             {readOnly ?
               <IonButton onClick={() => setReadOnly(!readOnly)} expand="block">Edit Profile</IonButton> :
@@ -80,10 +82,10 @@ const Profile: React.FC = () => {
           <IonCardContent>
             <IonList>
 
-              {pendingInvites.map(invite => {
+              {pendingInvites.map((invite, index) => {
                 const slidingItem = createRef<HTMLIonItemSlidingElement>()
-                return <>
-                  <IonItemSliding ref={slidingItem}>
+                return (
+                  <IonItemSliding ref={slidingItem} key={index}>
                     <IonItem onClick={() => slidingItem.current?.open("end")}>
                       <IonLabel>
                         <h2>{invite.name}</h2>
@@ -102,13 +104,14 @@ const Profile: React.FC = () => {
                       </IonItemOption>
                     </IonItemOptions>
                   </IonItemSliding>
-                </>
+                )
               }
               )}
 
             </IonList>
           </IonCardContent>
         </IonCard>
+        <IonButton style={{marginLeft: 16, marginRight: 16}} onClick={() => services.authService.logout()} expand="block">Sign out</IonButton>
       </IonContent>
     </IonPage>
   );

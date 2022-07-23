@@ -9,8 +9,8 @@
  */
 package com.hackmidwest.milliteambackend.controller;
 
-import com.hackmidwest.milliteambackend.model.Customer;
-import com.hackmidwest.milliteambackend.service.CustomerService;
+import com.hackmidwest.milliteambackend.model.Invitation;
+import com.hackmidwest.milliteambackend.service.InvitationService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,23 +21,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/invitations")
 @CrossOrigin
-public class CustomerController {
-  private CustomerService customerService;
+public class InvitationController {
+  InvitationService invitationService;
 
-  public CustomerController(CustomerService customerService) {
-    this.customerService = customerService;
+  public InvitationController(InvitationService invitationService) {
+    this.invitationService = invitationService;
   }
 
-  @GetMapping
-  public ResponseEntity<List<Customer>> getAllCustomers(){
-    return ResponseEntity.ok(customerService.getAllCustomers());
+  @GetMapping("/{customerId}/{type}")
+  public ResponseEntity<List<Invitation>> getInvitationsForCustomerByType(String customerId, String type){
+    return ResponseEntity.ok(invitationService.getInvitationsForCustomerAndType(customerId, type));
   }
 
   @PostMapping
-  public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-    return ResponseEntity.ok(customerService.createCustomer(customer));
+  public ResponseEntity<Invitation> createInvitation(@RequestBody Invitation invitation){
+    return ResponseEntity.ok(invitationService.createInvitation(invitation));
   }
-
 }
