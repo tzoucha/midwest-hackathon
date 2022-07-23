@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,9 +39,14 @@ public class InvitationController {
     return ResponseEntity.ok(invitationService.getInvitationsForCustomerAndType(customerId, type));
   }
 
-  @PostMapping
-  public ResponseEntity<Invitation> createInvitation(@RequestBody Invitation invitation){
-    return ResponseEntity.ok(invitationService.createInvitation(invitation));
+  @PostMapping("/friend")
+  public ResponseEntity<Invitation> sendFriendInvitation(@RequestParam String toCustomer, @RequestParam String fromCustomer){
+    return ResponseEntity.ok(invitationService.createFriendInvitation(toCustomer, fromCustomer));
+  }
+
+  @PostMapping("/account")
+  public ResponseEntity<Invitation> sendAccountInvitation(@RequestParam String toCustomer, @RequestParam String accountId){
+    return ResponseEntity.ok(invitationService.createFriendInvitation(toCustomer, accountId));
   }
 
   @DeleteMapping("/{id}")
@@ -51,6 +57,7 @@ public class InvitationController {
 
   @PostMapping("/{id}")
   public ResponseEntity<Invitation> acceptInvitation(@PathVariable String id){
+    invitationService.acceptInvitation(id);
     return ResponseEntity.status(HttpStatus.OK).body(null);
   }
 }

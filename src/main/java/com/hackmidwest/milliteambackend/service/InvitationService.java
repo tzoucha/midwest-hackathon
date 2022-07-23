@@ -15,6 +15,7 @@ import com.hackmidwest.milliteambackend.model.Invitation;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
 import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import com.hackmidwest.milliteambackend.repo.InvitationRepository;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,21 @@ public class InvitationService {
     return invitationRepository.findByToCustomerIdAndType(customerId, type);
   }
 
-  public Invitation createInvitation(Invitation invitation){
+  public Invitation createFriendInvitation(String toCustomer, String fromCustomer){
+    Invitation invitation = new Invitation();
+    invitation.setToCustomerId(toCustomer)
+        .setFromId(fromCustomer)
+        .setSentDateTime(LocalDateTime.now())
+        .setType("FRIEND");
+    return invitationRepository.save(invitation);
+  }
+
+  public Invitation createAccountInvitation(String toCustomer, String accountId){
+    Invitation invitation = new Invitation();
+    invitation.setToCustomerId(toCustomer)
+        .setFromId(accountId)
+        .setSentDateTime(LocalDateTime.now())
+        .setType("ACCOUNT");
     return invitationRepository.save(invitation);
   }
 
