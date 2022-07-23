@@ -24,6 +24,7 @@ public class Customer {
   public String city;
   public String state;
   public String zipCode;
+  public String phoneNumber;
 
   public String getId() {
     return id;
@@ -115,19 +116,12 @@ public class Customer {
     return this;
   }
 
-  @Override
-  public String toString() {
-    return "Customer{" +
-        "id='" + id + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", hashedPassword='" + hashedPassword + '\'' +
-        ", profilePicture='" + profilePicture + '\'' +
-        ", emailAddress='" + emailAddress + '\'' +
-        ", addressLine1='" + addressLine1 + '\'' +
-        ", city='" + city + '\'' +
-        ", state='" + state + '\'' +
-        ", zipCode='" + zipCode + '\'' +
-        '}';
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public Customer setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+    return this;
   }
 }
