@@ -30,4 +30,8 @@ public class CustomerService {
   public Customer createCustomer(Customer customer){
     return customerRepository.save(customer);
   }
+
+  public Customer login(Customer customer){
+    return customerRepository.findByEmailAddressAndPassword(customer.getEmailAddress(), customer.getPassword());
+  }
 }

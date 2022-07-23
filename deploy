@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd hackathon
+npm run build
+retVal=$?
+if [ $retVal -ne 0 ]; then
+  echo "Attempting to wipe node_modules and rerun build"
+  npm ci
+  npm run build
+fi
+cd -
+./mvnw clean install
