@@ -1,4 +1,4 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -21,7 +21,40 @@ const Dashboard: React.FC = () => {
             <IonCol size='12'>
               <h2>Accounts</h2>
             </IonCol>
-            <IonCol></IonCol>
+            <IonCol>
+              {/* Loop through cards for accounts */}
+                <IonCard> 
+                  <IonCardHeader>
+                    <IonGrid>
+                      <IonRow>
+                        <IonCol>
+                          Profile image
+                        </IonCol>
+                        <IonCol>
+                          Amount / Goal
+                        </IonCol>
+                      </IonRow>
+                    </IonGrid>
+                  </IonCardHeader>
+                  <IonCardContent>
+                    <IonGrid>
+                      <IonRow>
+                        <IonCol size='12'>
+                          Account Name
+                        </IonCol>
+                        <IonCol size='12'>
+                          Goal description
+                        </IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol>Participant images</IonCol>
+                        <IonCol>Arrow Icon</IonCol>
+                      </IonRow>
+                    </IonGrid>
+                  </IonCardContent>
+                </IonCard>
+                <IonButton expand="block">Create New Shared Goal</IonButton>
+            </IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>
