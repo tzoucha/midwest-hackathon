@@ -1,12 +1,12 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import './Dashboard.css';
+import './pageStyles.css';
 
 const Dashboard: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Profile Image Here</IonTitle>
+          <IonTitle>App Logo Here</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
