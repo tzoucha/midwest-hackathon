@@ -12,7 +12,9 @@ package com.hackmidwest.milliteambackend.service;
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountService {
 
   public AccountRepository accountRepository;
@@ -22,7 +24,7 @@ public class AccountService {
   }
 
   public List<Account> findAccountsForCustomer(String customerId){
-    return accountRepository.findByCustomerId(customerId);
+    return accountRepository.findByCustomerIds(customerId);
   }
 
   public Account createAccount(Account account){
