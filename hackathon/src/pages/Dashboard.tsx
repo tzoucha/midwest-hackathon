@@ -1,4 +1,4 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import './pageStyles.css';
 
 const Dashboard: React.FC = () => {
@@ -15,6 +15,17 @@ const Dashboard: React.FC = () => {
             <IonCol style={{textAlign: 'center'}}>
               <h1>Welcome</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonCard>
+                <IonCardHeader>Company Charity Goal</IonCardHeader>
+                <IonCardContent>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus.</p>
+                  <IonProgressBar value={0.5}></IonProgressBar>
+                </IonCardContent>
+              </IonCard>
             </IonCol>
           </IonRow>
           <IonRow>
