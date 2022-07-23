@@ -1,5 +1,7 @@
 import { storageService } from './storage'
 
+export const AUTH_CHANGE_EVENT = 'authChange';
+const USER_TOKEN_KEY = 'user_token';
 export class AuthService {
   token?: string;
   private initialized?: Promise<void>;
@@ -10,7 +12,7 @@ export class AuthService {
 
   async _initialize() {
     await storageService.initialize();
-    this.token = (await storageService.storage.get('user_token')) || 'fake_token'
+    this.token = (await storageService.storage.get(USER_TOKEN_KEY)) || 'fake_token'
   }
   initialize() {
     if(!this.initialized) {
@@ -21,6 +23,11 @@ export class AuthService {
 
   isAuthorized() {
     return !!this.token;
+  }
+
+  async login(username: string, password: string) {
+    this.token = 'fakeToken'
+    return true
   }
 }
 

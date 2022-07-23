@@ -3,6 +3,7 @@ import {
   IonApp,
   IonIcon,
   IonLabel,
+  IonLoading,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -35,21 +36,38 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { useServices } from './services/providers';
 import { useEffect, useState } from 'react';
+import LoginPage from './pages/Login';
+import { AUTH_CHANGE_EVENT } from './services/auth.service';
 
 setupIonicReact();
 
 const AuthChooser = () => {
   const services = useServices();
+  const [isInitialized, setIsInitialized] = useState(false) 
   const [isAuthorized, setIsAuthorized] = useState(false)
   useEffect(() => {
+    setIsInitialized(false);
     (async () => {
       await services.authService.initialize();
       setIsAuthorized(services.authService.isAuthorized())
+      setIsInitialized(true);
     })()
   }, [services.authService]);
-  return (isAuthorized
+  useEffect(() => {
+    const listener = () => {
+      setIsAuthorized(services.authService.isAuthorized())
+    }
+    document.addEventListener(AUTH_CHANGE_EVENT, listener)
+    return () => {
+      document.removeEventListener(AUTH_CHANGE_EVENT, listener);
+    }
+  }, [])
+  return (
+    !isInitialized
+    ? <IonLoading isOpen={true} />
+    : isAuthorized
     ? <AuthedRoutes />
-    : <input type='button' value='LOGIN' onClick={() => setIsAuthorized(true)}/>)
+    : <UnauthedRoutes />)
 }
 
 const App: React.FC = () => (
@@ -62,27 +80,36 @@ const App: React.FC = () => (
 
 export default App;
 const AuthedRoutes = () => 
-<IonTabs>
-  <IonRouterOutlet>
-    <Route exact path="/dashboard">
-      <Dashboard />
-    </Route>
-    <Route exact path="/profile">
-      <Profile />
-    </Route>
-    <Route exact path="/">
+  <IonTabs>
+    <IonRouterOutlet>
+      <Route exact path="/dashboard">
+        <Dashboard />
+      </Route>
+      <Route exact path="/profile">
+        <Profile />
+      </Route>
       <Redirect to="/dashboard" />
-    </Route>
-  </IonRouterOutlet>
-  <IonTabBar slot="bottom">
-    <IonTabButton tab="dashboard" href="/dashboard">
-      <IonIcon icon={homeOutline} />
-      <IonLabel>Tab 1</IonLabel>
-    </IonTabButton>
-    <IonTabButton tab="profile" href="/profile">
-      <IonIcon icon={personCircleOutline} />
-      <IonLabel>Profile</IonLabel>
-    </IonTabButton>
-  </IonTabBar>
-</IonTabs>;
+    </IonRouterOutlet>
+    <IonTabBar slot="bottom">
+      <IonTabButton tab="dashboard" href="/dashboard">
+        <IonIcon icon={homeOutline} />
+        <IonLabel>Tab 1</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="profile" href="/profile">
+        <IonIcon icon={personCircleOutline} />
+        <IonLabel>Profile</IonLabel>
+      </IonTabButton>
+    </IonTabBar>
+  </IonTabs>;
+
+const UnauthedRoutes = () => {
+  return (
+    <IonRouterOutlet>
+      <Route exact path="/login">
+        <LoginPage />
+      </Route>
+      <Redirect to="/login" />
+    </IonRouterOutlet>
+  )
+}
 
