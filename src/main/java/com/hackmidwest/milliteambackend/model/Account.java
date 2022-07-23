@@ -27,7 +27,7 @@ public class Account {
   public BigDecimal goal;
   public LocalDate startDate;
   public LocalDate endDate;
-  public String name;
+  public String title;
 
   public String getId() {
     return id;
@@ -119,12 +119,12 @@ public class Account {
     return this;
   }
 
-  public String getName() {
-    return name;
+  public String getTitle() {
+    return title;
   }
 
-  public Account setName(String name) {
-    this.name = name;
+  public Account setTitle(String title) {
+    this.title = title;
     return this;
   }
 
@@ -147,13 +147,13 @@ public class Account {
         Objects.equals(goal, account.goal) &&
         Objects.equals(startDate, account.startDate) &&
         Objects.equals(endDate, account.endDate) &&
-        Objects.equals(name, account.name);
+        Objects.equals(title, account.title);
   }
 
   @Override
   public int hashCode() {
     return Objects
         .hash(id, customerIds, balance, type, primaryOwnerCustomerId, description, picture, goal,
-            startDate, endDate, name);
+            startDate, endDate, title);
   }
 }
