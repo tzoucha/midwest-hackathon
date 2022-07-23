@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardH
 import { IonNote } from '@ionic/react';
 
 import { trash, checkbox } from 'ionicons/icons';
-
+import './pageStyles.css';
 
 const Profile: React.FC = () => {
 
@@ -26,7 +26,6 @@ const Profile: React.FC = () => {
   const [address, setAddress] = useState<string>("19622 Gail Ave Omaha, NE 68135");
   const [phone, setPhone] = useState<string>("5317774149");
   const [readOnly, setReadOnly] = useState<boolean>(true)
-  const props = { id: 'time', type: 'time' };
   return (
     <IonPage>
       <IonHeader>
