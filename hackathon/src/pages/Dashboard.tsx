@@ -1,5 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonCol, IonContent, IonGrid, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -7,16 +6,24 @@ const Dashboard: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 1</IonTitle>
+          <IonTitle>Profile Image Here</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
+        <IonGrid>
+          <IonRow className="ion-align-items-center">
+            <IonCol style={{textAlign: 'center'}}>
+              <h1>Welcome</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size='12'>
+              <h2>Accounts</h2>
+            </IonCol>
+            <IonCol></IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
