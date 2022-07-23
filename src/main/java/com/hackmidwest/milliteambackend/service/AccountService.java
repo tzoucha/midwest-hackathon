@@ -27,7 +27,7 @@ public class AccountService {
     return accountRepository.findByCustomerIds(customerId);
   }
 
-  public Account createAccount(Account account){
+  public Account createOrUpdateAccount(Account account){
     return accountRepository.save(account);
   }
 }

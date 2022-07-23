@@ -9,17 +9,25 @@
  */
 package com.hackmidwest.milliteambackend.service;
 
+import com.hackmidwest.milliteambackend.model.Account;
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.model.Invitation;
+import com.hackmidwest.milliteambackend.repo.AccountRepository;
+import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import com.hackmidwest.milliteambackend.repo.InvitationRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InvitationService {
-  InvitationRepository invitationRepository;
+  private InvitationRepository invitationRepository;
+  private CustomerRepository customerRepository;
+  private AccountRepository accountRepository;
 
-  public InvitationService(InvitationRepository invitationRepository) {
+  public InvitationService(InvitationRepository invitationRepository, CustomerRepository customerRepository) {
     this.invitationRepository = invitationRepository;
+    this.customerRepository = customerRepository;
   }
 
   public List<Invitation> getInvitationsForCustomerAndType(String customerId, String type){
@@ -28,5 +36,32 @@ public class InvitationService {
 
   public Invitation createInvitation(Invitation invitation){
     return invitationRepository.save(invitation);
+  }
+
+  public void deleteInvitation(String id){
+    invitationRepository.deleteById(id);
+  }
+
+  public void acceptInvitation(String id){
+    Invitation invitation = invitationRepository.findById(id).get();
+    if(invitation.getType().equalsIgnoreCase("FRIEND")){
+      Customer customer = customerRepository.findById(invitation.getToCustomerId()).get();
+      addFriendToCustomer(customer, invitation.getFromId());
+      customer = customerRepository.findById(invitation.getFromId()).get();
+      addFriendToCustomer(customer, invitation.getToCustomerId());
+    } else {
+      Account account = accountRepository.findById(invitation.getFromId()).get();
+      account.getCustomerIds().add(invitation.getToCustomerId());
+      accountRepository.save(account);
+    }
+    invitationRepository.delete(invitation);
+  }
+
+  private void addFriendToCustomer(Customer customer, String friendCustomerId){
+    if(customer.getFriendCustomerIds() == null){
+      customer.setFriendCustomerIds(new ArrayList<>());
+    }
+    customer.getFriendCustomerIds().add(friendCustomerId);
+    customerRepository.save(customer);
   }
 }
