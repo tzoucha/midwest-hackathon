@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd hackathon
+npm run build
+cd -
+./mvnw clean install
