@@ -15,5 +15,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface AccountRepository extends MongoRepository<Account, String> {
 
   List<Account> findByCustomerIds(String customerId);
+  List<Account> findByPrimaryOwnerCustomerId(String primaryOwnerCustomerId);
 
 }

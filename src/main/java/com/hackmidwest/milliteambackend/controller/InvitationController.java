@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,7 +45,7 @@ public class InvitationController {
 
   @PostMapping("/account")
   public ResponseEntity<Invitation> sendAccountInvitation(@RequestParam String toCustomer, @RequestParam String accountId){
-    return ResponseEntity.ok(invitationService.createFriendInvitation(toCustomer, accountId));
+    return ResponseEntity.ok(invitationService.createAccountInvitation(toCustomer, accountId));
   }
 
   @DeleteMapping("/{id}")

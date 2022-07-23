@@ -26,9 +26,13 @@ public class InvitationService {
   private CustomerRepository customerRepository;
   private AccountRepository accountRepository;
 
-  public InvitationService(InvitationRepository invitationRepository, CustomerRepository customerRepository) {
+  public InvitationService(
+      InvitationRepository invitationRepository,
+      CustomerRepository customerRepository,
+      AccountRepository accountRepository) {
     this.invitationRepository = invitationRepository;
     this.customerRepository = customerRepository;
+    this.accountRepository = accountRepository;
   }
 
   public List<Invitation> getInvitationsForCustomerAndType(String customerId, String type){
