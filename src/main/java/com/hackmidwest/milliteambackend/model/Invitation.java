@@ -10,10 +10,8 @@
 package com.hackmidwest.milliteambackend.model;
 
 import java.time.LocalDateTime;
-import org.springframework.data.annotation.Id;
 
 public class Invitation {
-  @Id
   public String id;
   public String toCustomerId;
   public String fromId;
