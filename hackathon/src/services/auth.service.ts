@@ -20,17 +20,17 @@ const USER_TOKEN_KEY = 'user_token';
 // }
 export class AuthService {
   user?: {
-    id: String,
-    firstName: String,
-    lastName: String,
-    password: String,
-    profilePicture: String,
-    emailAddress: String,
-    addressLine1: String,
-    city: String,
-    state: String,
-    zipCode: String,
-    phoneNumber: String,
+    id: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+    profilePicture: string,
+    emailAddress: string,
+    addressLine1: string,
+    city: string,
+    state: string,
+    zipCode: string,
+    phoneNumber: string,
   };
   private initialized?: Promise<void>;
 
