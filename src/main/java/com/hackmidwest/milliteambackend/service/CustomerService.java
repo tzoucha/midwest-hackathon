@@ -29,7 +29,7 @@ public class CustomerService {
 
   public Customer createOrUpdateCustomer(Customer customer, boolean create){
     if (create) {
-      customer.setProfilePicture("bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey");
+      customer.setProfilePicture("6beb987b-5164-4112-ade0-3fbc49abf78e");
     }
     return customerRepository.save(customer);
   }

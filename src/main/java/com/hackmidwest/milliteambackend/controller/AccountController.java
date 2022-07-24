@@ -10,6 +10,7 @@
 package com.hackmidwest.milliteambackend.controller;
 
 import com.hackmidwest.milliteambackend.model.Account;
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.service.AccountService;
 import java.util.Set;
 import org.springframework.http.HttpStatus;
@@ -41,17 +42,23 @@ public class AccountController {
 
   @PostMapping()
   public ResponseEntity<Account> createAccount(@RequestBody Account account){
-    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account, true));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Account> updateAccount(@RequestBody Account account){
-    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account, false));
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Account> closeAccount(@PathVariable String id){
     accountService.closeAccount(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<Customer> dropAllAccounts(){
+    accountService.dropAllAccounts();
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }

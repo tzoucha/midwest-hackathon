@@ -11,10 +11,7 @@ package com.hackmidwest.milliteambackend.service;
 
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +35,14 @@ public class AccountService {
     accountRepository.deleteById(accountId);
   }
 
-  public Account createOrUpdateAccount(Account account){
+  public Account createOrUpdateAccount(Account account, boolean create){
+    if (create) {
+      account.setPicture("88bc65c0-e4a8-44f3-8cbd-32082bb5655d");
+    }
     return accountRepository.save(account);
+  }
+
+  public void dropAllAccounts(){
+    accountRepository.deleteAll();
   }
 }
