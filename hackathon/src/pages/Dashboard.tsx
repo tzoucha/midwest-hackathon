@@ -1,4 +1,4 @@
-import { IonAccordion, IonAccordionGroup, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAccordion, IonAccordionGroup, IonAvatar, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import axios from 'axios';
 import { heartCircleOutline, addCircleOutline } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol size='12'>
-                          <IonProgressBar value={(quarterlyPocketInfo?.data.balance || 0) / (quarterlyPocketInfo?.data.goal || 1)} style={{'--progress-background': quarterlyPocketInfo?.data.color || 'black', '--background': '#f4f5f8'}}></IonProgressBar>
+                          <IonProgressBar value={(quarterlyPocketInfo?.data.balance || 0) / (quarterlyPocketInfo?.data.goal || 1)} style={{'--progress-background': quarterlyPocketInfo?.data.color || 'black', '--background': '#f4f5f8', height: '20px', borderRadius: '10px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
                         </IonCol>
                         <IonCol style={{textAlign: 'right'}}><strong>{(quarterlyPocketInfo?.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(quarterlyPocketInfo?.data.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                       </IonRow>
@@ -106,16 +106,22 @@ const Dashboard: React.FC = () => {
                     <IonCardContent style={{paddingBottom:5}}>
                       <IonGrid>
                         <IonRow>
-                          <IonCol size="2">
-                            <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
+                          <IonCol size="12">
+                          <IonItem lines='none'>
+                            <IonAvatar slot="start">
+                              <img src={`${baseUrl}/profile-pic/${pocket.picture}`} />
+                            </IonAvatar>
+                            <IonLabel>
+                              <p style={{marginBottom:10}}>{pocket.description}</p>
+                            </IonLabel>
+                          </IonItem>
                           </IonCol>
                           <IonCol>
-                          <p style={{marginBottom:10}}>{pocket.description}</p>
                           </IonCol>
                         </IonRow>
                         <IonRow>
                           <IonCol size='12'>
-                            <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'--progress-background': pocket.color || 'black', '--background': '#f4f5f8'}}></IonProgressBar>
+                            <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'--progress-background': pocket.color || 'black', '--background': '#f4f5f8', height: '20px', borderRadius: '10px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
                           </IonCol>
                           <IonCol style={{textAlign: 'right'}}><strong>{(pocket.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(pocket.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                         </IonRow>
