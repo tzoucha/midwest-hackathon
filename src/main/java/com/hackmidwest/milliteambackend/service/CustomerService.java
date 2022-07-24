@@ -28,6 +28,7 @@ public class CustomerService {
   }
 
   public Customer createOrUpdateCustomer(Customer customer){
+    customer.setProfilePicture("bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey");
     return customerRepository.save(customer);
   }
 
