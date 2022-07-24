@@ -1,4 +1,4 @@
-import { IonAvatar, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonRow, IonSegment, IonSegmentButton, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonRow, IonSegment, IonSegmentButton, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, useIonLoading } from '@ionic/react';
 import axios from 'axios';
 import { person, call, settings } from 'ionicons/icons';
 import { useState, useEffect } from 'react';
@@ -8,15 +8,27 @@ import { useServices } from '../services/providers';
 import './pageStyles.css';
 
 const Goal: React.FC = () => {
+  const services = useServices();
+  const [present, dismiss] = useIonLoading();
   let {goalUID} = useParams<any>();
   const [pocketInfo, setPocketInfo] = useState({loading: true} as {loading?: boolean, data: any})
   const [tranView, setTranView] = useState('contributions')
+  const [values, setValues] = useState({loading: true} as {loading?: boolean, data?: any})
+  const [readOnly, setReadOnly] = useState(true)
   useEffect(() => {
-    (async () => {
-      const pocket = (await axios.get(`${baseUrl}/accounts/details/${goalUID}`)).data
-      setPocketInfo({data: pocket})
-    })()
-  }, [])
+    if(goalUID) {
+      (async () => {
+        const pocket = (await axios.get(`${baseUrl}/accounts/details/${goalUID}`)).data
+        setPocketInfo({data: pocket})
+        setValues({data: 
+          {
+            ...pocket,
+            goal: (pocket.goal).toLocaleString("en-US", {style:"currency", currency:"USD"}),
+            endDate: (new Date(pocket.endDate)).toLocaleDateString([],{year: "numeric",month: "2-digit",day: "2-digit"})
+          }})
+      })()
+    }
+  }, [goalUID])
   const [transactionInfo, setTransactionInfo] = useState({loading: true} as {loading?: boolean, data: any[]})
   useEffect(() => {
     (async () => {
@@ -60,20 +72,81 @@ const Goal: React.FC = () => {
                 <p style={{marginTop:10}}>{pocketInfo.data.description}</p>
                 <IonGrid>
                   <IonRow>
-                    <IonProgressBar value={(pocketInfo?.data.balance || 0) / (pocketInfo?.data.goal || 1)} style={{'--progress-background': pocketInfo?.data.color || 'black', '--background': '#f4f5f8',height: '20px', borderRadius: '10px', margin: 10}}></IonProgressBar>
-                    <IonCol size='6'>Raised so far:<br/> <strong>{(pocketInfo.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
-                    <IonCol size='6'>Goal amount:<br/> <strong>{(pocketInfo.data.goal).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
-                    <IonCol size='6'>Start date:<br/> <strong>{new Date(pocketInfo.data.startDate).toLocaleDateString([], {year: "numeric",month: "2-digit",day: "2-digit"})}</strong></IonCol>
-                    <IonCol size='6'>End date:<br/> <strong>{(new Date(pocketInfo.data.endDate)).toLocaleDateString([],{year: "numeric",month: "2-digit",day: "2-digit"})}</strong></IonCol>
+                    <IonProgressBar value={(pocketInfo?.data.balance || 0) / (pocketInfo?.data.goal || 1)} style={{'opacity': '0.5','--progress-background': pocketInfo?.data.color || 'black', '--background': '#f4f5f8',height: '15px', borderRadius: '5px', margin: 10}}></IonProgressBar>
+                    <IonCol size="6">
+                      <IonItem>
+                        <IonLabel position="stacked">Raised so far:</IonLabel>
+                        <IonInput readonly={true} value={(pocketInfo.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}></IonInput>
+                      </IonItem>
+                      <IonItem>
+                        <IonLabel position="stacked">Start date:</IonLabel>
+                        <IonInput readonly={true} value={new Date(pocketInfo.data.startDate).toLocaleDateString([], {year: "numeric",month: "2-digit",day: "2-digit"})}></IonInput>
+                      </IonItem>
+                    </IonCol>
+                    <IonCol size="6">
+                      <IonItem>
+                        <IonLabel position="stacked">Goal amount:</IonLabel>
+                        <IonInput readonly={readOnly} value={values.data?.goal} onIonChange={(e) => setValues(vs => ({data: {...vs.data, goal: e.detail.value}}))}></IonInput>
+                      </IonItem>
+                      <IonItem>
+                        <IonLabel position="stacked">End date:</IonLabel>
+                        <IonInput readonly={readOnly} value={values.data?.endDate} onIonChange={(e) => setValues(vs => ({data: {...vs.data, endDate: e.detail.value }}))}></IonInput>
+                      </IonItem>
+                    </IonCol>
                   </IonRow>
+                  {!readOnly && <IonRow>
+                    <IonCol>
+                      <IonButton type="button" style={{width: '100%'}} onClick={async () => {
+                        await present();
+                        try {
+                          const updatedValues = values.data
+                          setValues({loading: true})
+                          var config = {
+                            method: 'put',
+                            url: `${baseUrl}/accounts/${goalUID}`,
+                            data: {
+                              id: services.authService.user?.id,
+                              ...updatedValues,
+                              balance: pocketInfo.data.balance,
+                              goal: parseFloat(updatedValues.goal.replace(/[$,]/g, '')),
+                              startDate: pocketInfo.data.startDate,
+                              endDate: new Date(updatedValues.endDate).toISOString().split('T')[0]
+                            }
+                          };
+                          // console.log("BODY", config.data)
+                          const result = (await axios(config));
+                          setPocketInfo({data: result.data});
+                          setValues({data: 
+                            {
+                              ...result.data,
+                              goal: (result.data.goal).toLocaleString("en-US", {style:"currency", currency:"USD"}),
+                              endDate: (new Date(result.data.endDate)).toLocaleDateString([],{year: "numeric",month: "2-digit",day: "2-digit"})
+                            }})
+                          setReadOnly(true)
+                        } catch(e) {
+                          console.error(e);
+                        }
+                        dismiss();
+                      }} color="primary">Save</IonButton></IonCol>
+                    <IonCol><IonButton color="secondary" style={{width: '100%'}} onClick={() => {
+                      setValues({data: 
+                        {
+                          ...pocketInfo.data,
+                          goal: (pocketInfo.data.goal).toLocaleString("en-US", {style:"currency", currency:"USD"}),
+                          endDate: (new Date(pocketInfo.data.endDate)).toLocaleDateString([],{year: "numeric",month: "2-digit",day: "2-digit"})
+                        }})
+                      setReadOnly(true)
+                    }}>Cancel</IonButton></IonCol>
+                  </IonRow>}
                 </IonGrid>
               </IonCardContent>
             </IonCard>
           </IonRow>
           <IonRow>
-            <IonCol size='4'>
-              <IonButton style={{'--border-color':pocketInfo.data.color || 'black', '--color':pocketInfo.data.color, '--background-activated':'#fff', '--color-activated':'#ccc' }} expand="block" shape="round" fill="outline">Edit</IonButton>
-              </IonCol>
+            {readOnly && <IonCol size='4'>
+              <IonButton style={{'--border-color':pocketInfo.data.color || 'black', '--color':pocketInfo.data.color, '--background-activated':'#fff', '--color-activated':'#ccc' }} expand="block" shape="round" fill="outline"
+                onClick={() => setReadOnly(false)}>Edit</IonButton>
+            </IonCol>}
             <IonCol>
               <IonButton style={{'--background':pocketInfo.data.color || 'black', '--background-activated':'#ccc'}} expand="block" shape="round">Invite Friend</IonButton>
             </IonCol>
@@ -94,13 +167,13 @@ const Goal: React.FC = () => {
             {transactionInfo?.data && transactionInfo?.data.map((trans, index) => 
               <IonItem key={index}>
                 <IonAvatar>
-                  <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
+                  <img src={`${baseUrl}/profile-pic/${trans.profilePicture}`}/>
                 </IonAvatar>
                 <IonLabel>
                   <IonGrid>
                     <IonRow>
                       <IonCol>
-                        First Name L.
+                        {trans.name || trans.description}
                       </IonCol>
                       <IonCol size='auto'>
                         <strong style={{color:'#42b95c'}}>+{(trans.amount || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong>

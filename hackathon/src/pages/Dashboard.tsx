@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
           <IonRow className="ion-align-items-center">
             <IonCol>
               <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, {services.authService.user?.firstName}!</h1>
-              <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by <a href="/create-goal">creating a pocket</a>.</p>
+              <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by creating a pocket.</p>
             </IonCol>
           </IonRow>
           {quarterlyPocketInfo.data ? <IonAccordionGroup>
@@ -77,13 +77,13 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol size='12'>
-                          <IonProgressBar value={(quarterlyPocketInfo?.data.balance || 0) / (quarterlyPocketInfo?.data.goal || 1)} style={{'--progress-background': quarterlyPocketInfo?.data.color || 'black', '--background': '#f4f5f8', height: '20px', borderRadius: '10px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
+                          <IonProgressBar value={(quarterlyPocketInfo?.data.balance || 0) / (quarterlyPocketInfo?.data.goal || 1)} style={{'opacity': '0.5','--progress-background': quarterlyPocketInfo?.data.color || 'black', '--background': '#f4f5f8', height: '15px', borderRadius: '5px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
                         </IonCol>
                         <IonCol style={{textAlign: 'right'}}><strong>{(quarterlyPocketInfo?.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(quarterlyPocketInfo?.data.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                       </IonRow>
                       <IonRow>
                         <IonCol style={{textAlign:'right'}}>
-                          <IonButton style={{'--background':quarterlyPocketInfo?.data.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${quarterlyPocketInfo?.data.id}`}>View Pocket</IonButton>
+                          <IonButton style={{'--background':quarterlyPocketInfo?.data.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' href={`/goal/${quarterlyPocketInfo?.data.id}`}>View Pocket</IonButton>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
@@ -121,13 +121,13 @@ const Dashboard: React.FC = () => {
                         </IonRow>
                         <IonRow>
                           <IonCol size='12'>
-                            <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'--progress-background': pocket.color || 'black', '--background': '#f4f5f8', height: '20px', borderRadius: '10px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
+                            <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'opacity': '0.5','--progress-background': pocket.color || 'black', '--background': '#f4f5f8', height: '15px', borderRadius: '5px', marginTop: 10, marginBottom: 10}}></IonProgressBar>
                           </IonCol>
                           <IonCol style={{textAlign: 'right'}}><strong>{(pocket.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(pocket.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                         </IonRow>
                         <IonRow>
                           <IonCol style={{textAlign:'right'}}>
-                            <IonButton style={{'--background':pocket.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${pocket.id}`}>View Pocket</IonButton>
+                            <IonButton style={{'--background':pocket.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' href={`/goal/${pocket.id}`}>View Pocket</IonButton>
                           </IonCol>
                         </IonRow>
                       </IonGrid>
@@ -136,10 +136,9 @@ const Dashboard: React.FC = () => {
               </IonCol>
             </IonRow>
           )}
-          {/* <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton> */}
         </IonGrid>
         <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
-          <IonButton style={{ margin: 16 }} routerLink="/create-goal" expand="block"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
+          <IonButton shape="round" style={{ margin: 16 }} routerLink="/create-goal" expand="block"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
         </span>
       </IonContent>
     </IonPage>
