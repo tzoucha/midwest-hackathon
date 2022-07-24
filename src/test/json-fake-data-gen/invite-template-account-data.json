@@ -3,35 +3,56 @@
     "toCustomerId": "62dc9271157b8d7fd5f07d76",
     "fromId": "62dcb3e0244aaff5d2ff0771",
     "type": "ACCOUNT",
-    "sentDateTime": "2018-04-09T08:10:24 +05:00",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   },
   {
     "toCustomerId": "62dc92717bf8ae1811066831",
     "fromId": "62dcb3e0244aaff5d2ff0771",
     "type": "ACCOUNT",
-    "sentDateTime": "2020-07-11T01:11:24 +05:00",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   },
   {
     "toCustomerId": "62dc927115da4f70866876b8",
     "fromId": "62dcb3e0e53d9f1a3c7e7498",
     "type": "ACCOUNT",
-    "sentDateTime": "2017-10-08T09:30:46 +05:00",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   },
   {
     "toCustomerId": "62dc92710229952bc52fac4c",
     "fromId": "62dcb3e0e53d9f1a3c7e7498",
     "type": "ACCOUNT",
-    "sentDateTime": "2014-11-06T07:36:52 +06:00",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   },
   {
     "toCustomerId": "62dc927113fc9df8ddf6d6b0",
     "fromId": "62dcb3e082b99e6eedb7cc16",
     "type": "ACCOUNT",
-    "sentDateTime": "2014-02-23T10:16:38 +06:00",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc9271259bff25f586f167",
+    "fromId": "62dcb3e082b99e6eedb7cc16",
+    "type": "ACCOUNT",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc9271259bff25f586f167",
+    "fromId": "62dcb3e05da0a885384c1a0b",
+    "type": "ACCOUNT",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc9271259bff25f586f167",
+    "fromId": "62dcb3e021b89aa1efbd73ec",
+    "type": "ACCOUNT",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   }
 ]
