@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.hackmidwest.milliteambackend.config.PinataConfig;
 import com.hackmidwest.milliteambackend.model.PinataUploadResponse;
+import com.hackmidwest.milliteambackend.repo.AccountRepository;
 import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ public class PinataService {
 
   @Autowired
   CustomerRepository repo;
+
+  @Autowired
+  AccountRepository accountRepo;
 
   WebClient milliGateway = WebClient.builder()
       .baseUrl("https://milli.mypinata.cloud/ipfs/").build();
@@ -39,7 +43,7 @@ public class PinataService {
 
   }
 
-  public PinataUploadResponse uploadPinataNFT(MultipartFile image, String userId) throws Exception {
+  public PinataUploadResponse uploadPinataNFT(MultipartFile image, String userId, boolean profilePic) throws Exception {
     MultipartBodyBuilder builder = new MultipartBodyBuilder();
     builder.part("files", image.getResource());
     builder.part("name", image.getOriginalFilename());
@@ -63,10 +67,18 @@ public class PinataService {
             // response.bodyToMono(String.class).block());
           }
         }).doOnSuccess(result -> {
-          repo.findById(userId).ifPresent(customer -> {
-            customer.setProfilePicture(result.items.get(0).cid);
-            repo.save(customer);
-          });
+          if (profilePic) {
+            repo.findById(userId).ifPresent(customer -> {
+              customer.setProfilePicture(result.items.get(0).cid);
+              repo.save(customer);
+            });
+          } else {
+            accountRepo.findById(userId).ifPresent(account -> {
+              account.setPicture(result.items.get(0).cid);
+              accountRepo.save(account);
+            });
+          }
+          
         }).block();
 
   }

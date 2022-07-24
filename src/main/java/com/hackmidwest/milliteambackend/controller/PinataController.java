@@ -31,7 +31,7 @@ public class PinataController {
   }
   
   @PostMapping("/profile-pic")
-  public PinataUploadResponse uploadProfilePic(@RequestPart String id, @RequestPart MultipartFile image) throws Exception {
-    return service.uploadPinataNFT(image, id);
+  public PinataUploadResponse uploadProfilePic(@RequestPart String id, @RequestPart boolean customer, @RequestPart MultipartFile image) throws Exception {
+    return service.uploadPinataNFT(image, id, customer);
   }
 }
