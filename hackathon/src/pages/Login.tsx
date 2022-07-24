@@ -1,6 +1,5 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonImg, IonInput, IonItem, IonLabel, IonPage, IonRow, useIonLoading } from '@ionic/react';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonImg, IonInput, IonItem, IonLabel, IonPage, IonRow, useIonLoading } from '@ionic/react';
 import { useState } from 'react';
-import { AUTH_CHANGE_EVENT } from '../services/auth.service';
 import { useServices } from '../services/providers';
 
 export const LoginPage = () => {

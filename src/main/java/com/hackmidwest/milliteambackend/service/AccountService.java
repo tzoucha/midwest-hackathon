@@ -34,6 +34,10 @@ public class AccountService {
     return ret;
   }
 
+  public void closeAccount(String accountId){
+    accountRepository.deleteById(accountId);
+  }
+
   public Account createOrUpdateAccount(Account account){
     return accountRepository.save(account);
   }
