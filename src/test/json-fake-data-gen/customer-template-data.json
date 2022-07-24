@@ -1,0 +1,246 @@
+[
+  {
+    "id": "62dc9271157b8d7fd5f07d76",
+    "firstName": "Hattie",
+    "lastName": "Caldwell",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Keisha@milli-bank.com",
+    "addressLine1": "604 Grimes Road",
+    "city": "Bloomington",
+    "state": "Missouri",
+    "zipCode": 41339,
+    "friendCustomerIds": [
+      "5c5cd412-4b9e-4a4a-8d40-3eb2a9446a30"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc92717bf8ae1811066831",
+    "firstName": "Luz",
+    "lastName": "Pratt",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Mcdaniel@milli-bank.com",
+    "addressLine1": "574 Havens Place",
+    "city": "Barclay",
+    "state": "Utah",
+    "zipCode": 48184,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc927115da4f70866876b8",
+    "firstName": "Lewis",
+    "lastName": "Keith",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Cochran@milli-bank.com",
+    "addressLine1": "716 Girard Street",
+    "city": "Woodlake",
+    "state": "Massachusetts",
+    "zipCode": 32563,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc92710229952bc52fac4c",
+    "firstName": "Norton",
+    "lastName": "Vinson",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Brittany@milli-bank.com",
+    "addressLine1": "803 Herbert Street",
+    "city": "Williston",
+    "state": "Rhode Island",
+    "zipCode": 66425,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228","62dc9271b2d5a2e84a15b1bb"
+
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc927113fc9df8ddf6d6b0",
+    "firstName": "Brittney",
+    "lastName": "Townsend",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Karin@milli-bank.com",
+    "addressLine1": "202 Beacon Court",
+    "city": "Waterloo",
+    "state": "Connecticut",
+    "zipCode": 70725,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831","62dc927137a20c42021a6138","62dc9271ba69ac3c7b3c6228","62dc9271b2d5a2e84a15b1bb"
+
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271ba69ac3c7b3c6228",
+    "firstName": "Vega",
+    "lastName": "Dennis",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Miller@milli-bank.com",
+    "addressLine1": "678 Monitor Street",
+    "city": "Belleview",
+    "state": "Tennessee",
+    "zipCode": 89556,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831","62dc927137a20c42021a6138","62dc927155e804d18d215c74","62dc9271b2d5a2e84a15b1bb"
+
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271b2d5a2e84a15b1bb",
+    "firstName": "Barry",
+    "lastName": "Lamb",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Dunlap@milli-bank.com",
+    "addressLine1": "164 Sutter Avenue",
+    "city": "Wilmington",
+    "state": "Iowa",
+    "zipCode": 15237,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831","62dc927137a20c42021a6138","62dc927155e804d18d215c74","62dc9271ad75e1143a251a16"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc927137a20c42021a6138",
+    "firstName": "Donovan",
+    "lastName": "Cummings",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Mccray@milli-bank.com",
+    "addressLine1": "844 Hutchinson Court",
+    "city": "Bennett",
+    "state": "Hawaii",
+    "zipCode": 83552,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc927155e804d18d215c74",
+    "firstName": "Britney",
+    "lastName": "Battle",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Serrano@milli-bank.com",
+    "addressLine1": "601 Holmes Lane",
+    "city": "Villarreal",
+    "state": "Delaware",
+    "zipCode": 25347,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271ad75e1143a251a16",
+    "firstName": "Dennis",
+    "lastName": "Wolf",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Charity@milli-bank.com",
+    "addressLine1": "883 Veterans Avenue",
+    "city": "Jacksonburg",
+    "state": "West Virginia",
+    "zipCode": 86385,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271ce855b907f8d4f97",
+    "firstName": "Jodie",
+    "lastName": "Carver",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Kidd@milli-bank.com",
+    "addressLine1": "972 Kensington Street",
+    "city": "Kerby",
+    "state": "Ohio",
+    "zipCode": 37945,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc92710f1628ffcdb819b3",
+    "firstName": "Lydia",
+    "lastName": "Washington",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Daniels@milli-bank.com",
+    "addressLine1": "950 Barwell Terrace",
+    "city": "Whitmer",
+    "state": "North Carolina",
+    "zipCode": 66721,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc92716bc26b9953a78dab",
+    "firstName": "Damen",
+    "lastName": "Abbott",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "damen@milli-bank.com",
+    "addressLine1": "564 Scott Avenue",
+    "city": "Vandiver",
+    "state": "Guam",
+    "zipCode": 29267,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271aa32c0c1926cfc34",
+    "firstName": "Ferrell",
+    "lastName": "Atkins",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Reilly@milli-bank.com",
+    "addressLine1": "308 Drew Street",
+    "city": "Bison",
+    "state": "Kansas",
+    "zipCode": 64601,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  },
+  {
+    "id": "62dc9271259bff25f586f167",
+    "firstName": "Lorene",
+    "lastName": "Cherry",
+    "password": "milli123",
+    "profilePicture": "https://myprofilepic@pinata.com",
+    "emailAddress": "Shanna@milli-bank.com",
+    "addressLine1": "495 Canal Avenue",
+    "city": "Frizzleburg",
+    "state": "Georgia",
+    "zipCode": 21765,
+    "friendCustomerIds": [
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+    ],
+    "_class": "com.hackmidwest.milliteambackend.model.Customer"
+  }
+]

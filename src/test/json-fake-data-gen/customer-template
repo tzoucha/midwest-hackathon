@@ -1,0 +1,23 @@
+[
+  '{{repeat(15)}}',
+  /**
+* Paste one or more documents here
+*/
+  { "id" : '{{objectId()}}',
+  "firstName": '{{firstName()}}',
+  "lastName": '{{surname()}}',
+  "password": "milli123",
+  "profilePicture": "https://myprofilepic@pinata.com",
+  "emailAddress": '{{firstName()}}'+"@milli-bank.com",
+  "addressLine1": '{{integer(100, 999)}} {{street()}}',
+  "city": '{{city()}}',
+   "state": '{{state()}}',
+  "zipCode": '{{integer(10000, 99999)}}',
+  "friendCustomerIds": [
+   '{{guid()}}'
+  ],
+  "_class": "com.hackmidwest.milliteambackend.model.Customer"
+}
+
+
+]
