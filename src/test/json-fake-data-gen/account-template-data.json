@@ -66,7 +66,7 @@
   {
     "_id": {"$oid":"62dcb3e021b89aa1efbd73ec"},
     "customerIds": [
-      "62dc927113fc9df8ddf6d6b0","c"
+      "62dc927113fc9df8ddf6d6b0","62dc92710229952bc52fac4c"
     ],
     "balance": "1026.29",
     "primaryOwnerCustomerId": "62dcb3e0147e9f91689ae764",
