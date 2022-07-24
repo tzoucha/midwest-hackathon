@@ -10,10 +10,9 @@
 package com.hackmidwest.milliteambackend.model;
 
 import java.util.List;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.data.annotation.Id;
 
 public class Customer {
-  @MongoId
   public String id;
   public String firstName;
   public String lastName;
