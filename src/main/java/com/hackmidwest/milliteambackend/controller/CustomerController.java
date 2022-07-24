@@ -12,6 +12,8 @@ package com.hackmidwest.milliteambackend.controller;
 import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.service.CustomerService;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,6 +34,11 @@ public class CustomerController {
 
   public CustomerController(CustomerService customerService) {
     this.customerService = customerService;
+  }
+
+  @GetMapping ("/{customerId}")
+  public ResponseEntity<Customer> getCustomerById(@PathVariable String customerId){
+    return ResponseEntity.ok(customerService.getCustomerById(customerId).get());
   }
 
   @GetMapping
