@@ -5,8 +5,8 @@ import { useServices } from '../services/providers';
 export const LoginPage = () => {
   const services = useServices();
   const [present, dismiss] = useIonLoading();
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('travis@milli-bank.com')
+  const [password, setPassword] = useState('milli123')
   const signIn = async () => {
     await present('Signing in...')
     // console.log("SIGN IN ATTEMPT", username, password)
