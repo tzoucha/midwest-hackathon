@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
                 
                   {!isAccount() &&
                   <IonAvatar style={{marginRight: "5px"}}>
-                    <img src={`${baseUrl}/profile-pic/${pic}`} />
+                    <img src={`${baseUrl}/profile-pic/${invite.profilePicture}`} />
                   </IonAvatar>}
                 <IonLabel>
                   {isAccount() ? invite.title : `${invite.firstName} ${invite.lastName}`}
