@@ -9,12 +9,19 @@ import { useServices } from '../services/providers';
 const Dashboard: React.FC = () => {
   const services = useServices();
   const [pocketInfo, setPocketInfo] = useState({loading: true} as {loading?: boolean, data: any[]})
+  const [quarterlyPocketInfo, setQuarterlyPocketInfo] = useState({loading: true} as {loading?: boolean, data: any})
   useEffect(() => {
     (async () => {
       const pockets = (await axios.get(`${baseUrl}/accounts/${services.authService.user?.id}`)).data
       setPocketInfo({data: pockets})
     })()
   }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     const pocket = (await axios.get(`${baseUrl}/accounts/details/62dcb3e0e53d9f1a3c7e7498`)).data
+  //     setQuarterlyPocketInfo({data: pocket})
+  //   })()
+  // }, [])
   return (
     <IonPage>
       <IonHeader>
@@ -35,11 +42,11 @@ const Dashboard: React.FC = () => {
         <IonGrid>
           <IonRow className="ion-align-items-center">
             <IonCol>
-              <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, Damen!</h1>
+              <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, {services.authService.user?.firstName}!</h1>
               <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by <a href="/create-goal">creating a pocket</a>.</p>
             </IonCol>
           </IonRow>
-          <IonAccordionGroup>
+          {quarterlyPocketInfo.data ? <IonAccordionGroup>
             <IonAccordion value="first">
               <IonItem slot="header" color="light">
                 <IonGrid>
@@ -57,7 +64,7 @@ const Dashboard: React.FC = () => {
               </IonItem>
               <div slot="content">
                 <IonCard>
-                  <IonCardHeader style={{backgroundColor: '#e8e8e8'}}><strong style={{fontSize: 18}}>Wounded Warriors Project</strong></IonCardHeader>
+                  <IonCardHeader style={{backgroundColor: '#e8e8e8'}}><strong style={{fontSize: 18}}>{quarterlyPocketInfo.data.title}</strong></IonCardHeader>
                   <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
                       <IonRow>
@@ -84,7 +91,7 @@ const Dashboard: React.FC = () => {
                 </IonCard>
               </div>
             </IonAccordion>
-          </IonAccordionGroup>
+          </IonAccordionGroup> : <></>}
           <IonRow>
             <IonCol size='12'>
               <h2 className='darkGray' style={{marginBottom:5}}>Your Pocket(s)</h2>

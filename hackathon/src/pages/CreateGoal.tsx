@@ -72,7 +72,7 @@ export const CreateGoal = () => {
             <IonItem className='ion-align-items-center' style={{marginBottom: 10}}>
               <IonLabel position="stacked">Color</IonLabel>
               <div style={{marginBottom: 10}}>
-              <CirclePicker onChange={(color) => setValues(vs => ({...vs, color: color.hex}))}/>
+              <CirclePicker colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3", "#03a9f4", "#00bcd4", "#009688", "#4caf50", "#8bc34a", "#ff9800"]} onChange={(color) => setValues(vs => ({...vs, color: color.hex}))}/>
               </div>
             </IonItem>
             <IonButton style={{ marginLeft: 16, marginRight: 16}} onClick={submit} expand="block">Create Goal</IonButton>
