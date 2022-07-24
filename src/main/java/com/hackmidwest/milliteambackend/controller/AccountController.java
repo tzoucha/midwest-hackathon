@@ -10,6 +10,7 @@
 package com.hackmidwest.milliteambackend.controller;
 
 import com.hackmidwest.milliteambackend.model.Account;
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.service.AccountService;
 import java.util.Set;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,13 @@ public class AccountController {
   }
 
   @GetMapping("/{customerId}")
-  public ResponseEntity<Set<Account>> findAccountsForCustomer(String customerId){
+  public ResponseEntity<Set<Account>> findAccountsForCustomer(@PathVariable String customerId){
     return ResponseEntity.ok(accountService.findAccountsForCustomer(customerId));
+  }
+
+  @GetMapping("/details/{accountId}")
+  public ResponseEntity<Account> findAccountById(@PathVariable String accountId){
+    return ResponseEntity.ok(accountService.findAccountByAccountId(accountId));
   }
 
   @PostMapping()
@@ -52,6 +58,12 @@ public class AccountController {
   @DeleteMapping("/{id}")
   public ResponseEntity<Account> closeAccount(@PathVariable String id){
     accountService.closeAccount(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<Customer> dropAllAccounts(){
+    accountService.dropAllAccounts();
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }

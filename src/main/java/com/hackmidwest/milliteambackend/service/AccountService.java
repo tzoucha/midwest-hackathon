@@ -31,6 +31,10 @@ public class AccountService {
     return ret;
   }
 
+  public Account findAccountByAccountId(String accountId){
+    return accountRepository.findById(accountId).get();
+  }
+
   public void closeAccount(String accountId){
     accountRepository.deleteById(accountId);
   }
@@ -40,5 +44,9 @@ public class AccountService {
       account.setPicture("88bc65c0-e4a8-44f3-8cbd-32082bb5655d");
     }
     return accountRepository.save(account);
+  }
+
+  public void dropAllAccounts(){
+    accountRepository.deleteAll();
   }
 }

@@ -1,0 +1,12 @@
+[
+  '{{repeat(15)}}',
+
+
+{
+  "toCustomerId": '{{objectId()}}',
+  "fromId": '{{objectId()}}',
+  "type": "ACCOUNT",
+  "sentDateTime": '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
+  "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+}
+]
