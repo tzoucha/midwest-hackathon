@@ -213,15 +213,15 @@
     "firstName": "Damen",
     "lastName": "Abbott",
     "password": "milli123",
-    "profilePicture": "910ceea9-f56b-4008-90ca-66fcd9182be1",
+    "profilePicture": "a15181d4-c7f2-4e29-9576-1402c4d77d2a",
     "emailAddress": "damen@milli-bank.com",
     "addressLine1": "564 Scott Avenue",
     "city": "Vandiver",
-    "state": "Guam",
+    "state": "Nebraska",
     "zipCode": 29267,
-    "phoneNumber" : "9136335781",
+    "phoneNumber" : "913-633-5781",
     "friendCustomerIds": [
-      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c","62dc927113fc9df8ddf6d6b0","62dc9271ba69ac3c7b3c6228"
+      "62dc9271157b8d7fd5f07d76","62dc927115da4f70866876b8","62dc92710229952bc52fac4c"
     ],
     "_class": "com.hackmidwest.milliteambackend.model.Customer"
   },
