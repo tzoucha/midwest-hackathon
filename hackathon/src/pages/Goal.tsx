@@ -60,7 +60,7 @@ const Goal: React.FC = () => {
                 <p style={{marginTop:10}}>{pocketInfo.data.description}</p>
                 <IonGrid>
                   <IonRow>
-                    <IonProgressBar value={(pocketInfo?.data.balance || 0) / (pocketInfo?.data.goal || 1)} style={{'--progress-background': pocketInfo?.data.color || 'black', '--background': '#f4f5f8',height: '20px', borderRadius: '10px', margin: 10}}></IonProgressBar>
+                    <IonProgressBar value={(pocketInfo?.data.balance || 0) / (pocketInfo?.data.goal || 1)} style={{'opacity': '0.5','--progress-background': pocketInfo?.data.color || 'black', '--background': '#f4f5f8',height: '15px', borderRadius: '5px', margin: 10}}></IonProgressBar>
                     <IonCol size='6'>Raised so far:<br/> <strong>{(pocketInfo.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
                     <IonCol size='6'>Goal amount:<br/> <strong>{(pocketInfo.data.goal).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
                     <IonCol size='6'>Start date:<br/> <strong>{new Date(pocketInfo.data.startDate).toLocaleDateString([], {year: "numeric",month: "2-digit",day: "2-digit"})}</strong></IonCol>
