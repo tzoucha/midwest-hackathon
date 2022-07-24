@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useRef, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal, useIonLoading, IonAvatar } from '@ionic/react';
 import { IonNote } from '@ionic/react';
 
-import { trash, checkbox, pencilOutline, createOutline } from 'ionicons/icons';
+import { trash, checkbox, pencilOutline, createOutline, chatbubblesOutline, logOut, logOutOutline, personAddOutline } from 'ionicons/icons';
 import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
@@ -149,7 +149,7 @@ const Profile: React.FC = () => {
               {bio.map((k, i) => <p key={i}>{k}</p>)}
             </div>
             {readOnly ?
-              <IonButton onClick={() => setReadOnly(!readOnly)} expand="block">Edit Profile</IonButton> :
+              <IonButton onClick={() => setReadOnly(!readOnly)} expand="block"><IonIcon slot="start" icon={createOutline} /> Edit Profile</IonButton> :
               <>
                 <IonButton onClick={async () => {
                   present();
@@ -183,7 +183,7 @@ const Profile: React.FC = () => {
             <IonCardTitle>Add a Friend</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block">Add a Friend</IonButton>
+            <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block"><IonIcon slot="start" icon={personAddOutline} /> Add a Friend</IonButton>
             <IonModal ref={addAFriendModalRef}>
               <IonHeader>
                 <IonToolbar>
@@ -209,7 +209,7 @@ const Profile: React.FC = () => {
           </IonCardContent>
         </IonCard>
         {/* <h2>Pending Invites</h2> */}
-        <IonCard>
+        <IonCard  style={{marginBottom: 150}}>
           <IonCardHeader>
             {/* <IonCardSubtitle><IonImg src={process.env.PUBLIC_URL + '/profile_pic.jpeg'} /></IonCardSubtitle> */}
             <IonCardTitle>Pending Invites</IonCardTitle>
@@ -254,9 +254,10 @@ const Profile: React.FC = () => {
             }
           </IonCardContent>
         </IonCard>
-        
-        <IonButton style={{ marginLeft: 16, marginRight: 16 }} onClick={() => services.authService.logout()} expand="block">Sign out</IonButton>
-        <IonButton style={{ marginLeft: 16, marginRight: 16 }}>Contact Us</IonButton>
+        <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
+          <IonButton fill='outline' style={{ margin: 16 }} onClick={() => {}} expand="block"><IonIcon slot="start" icon={chatbubblesOutline} /> Contact us</IonButton>
+          <IonButton style={{ margin: 16, marginBottom: 8 }} onClick={() => services.authService.logout()} expand="block"><IonIcon slot="start" icon={logOutOutline} /> Sign out</IonButton>
+        </span>
       </IonContent>
     </IonPage>
   );
