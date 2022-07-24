@@ -28,10 +28,22 @@ public class CustomerService {
   }
 
   public Customer createOrUpdateCustomer(Customer customer){
+    customer.setProfilePicture("bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey");
     return customerRepository.save(customer);
   }
 
   public Customer login(Customer customer){
     return customerRepository.findByEmailAddressAndPassword(customer.getEmailAddress(), customer.getPassword());
+  }
+
+  public void removeFriend(String customerId, String friendCustomerId){
+    excuteFriendRemoval(customerId, friendCustomerId);
+    excuteFriendRemoval(friendCustomerId, customerId);
+  }
+
+  private void excuteFriendRemoval(String friendOne, String friendTwo){
+    Customer customer = customerRepository.findById(friendOne).get();
+    customer.getFriendCustomerIds().remove(friendTwo);
+    customerRepository.save(customer);
   }
 }

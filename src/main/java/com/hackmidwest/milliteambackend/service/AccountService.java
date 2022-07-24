@@ -9,13 +9,14 @@
  */
 package com.hackmidwest.milliteambackend.service;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.stereotype.Service;
-
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
@@ -31,6 +32,10 @@ public class AccountService {
     ret.addAll(accountRepository.findByCustomerIds(customerId));
     ret.addAll(accountRepository.findByPrimaryOwnerCustomerId(customerId));
     return ret;
+  }
+
+  public void closeAccount(String accountId){
+    accountRepository.deleteById(accountId);
   }
 
   public Account createOrUpdateAccount(Account account){
