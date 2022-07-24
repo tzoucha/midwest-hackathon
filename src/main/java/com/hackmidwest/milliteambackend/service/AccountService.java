@@ -38,7 +38,10 @@ public class AccountService {
     accountRepository.deleteById(accountId);
   }
 
-  public Account createOrUpdateAccount(Account account){
+  public Account createOrUpdateAccount(Account account, boolean create){
+    if (create) {
+      account.setPicture("88bc65c0-e4a8-44f3-8cbd-32082bb5655d");
+    }
     return accountRepository.save(account);
   }
 }

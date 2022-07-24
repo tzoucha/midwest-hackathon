@@ -41,12 +41,12 @@ public class AccountController {
 
   @PostMapping()
   public ResponseEntity<Account> createAccount(@RequestBody Account account){
-    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account, true));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Account> updateAccount(@RequestBody Account account){
-    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account, false));
   }
 
   @DeleteMapping("/{id}")
