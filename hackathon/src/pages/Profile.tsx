@@ -7,6 +7,7 @@ import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
 import axios from 'axios';
+import Invitations from '../components/Invitations';
 
 const Profile: React.FC = () => {
   const services = useServices();
@@ -37,80 +38,32 @@ const Profile: React.FC = () => {
   const [readOnly, setReadOnly] = useState<boolean>(true)
   const filePicker = useRef<HTMLInputElement>(null)
   const [friendSearch, setFriendSearch] = useState<string>("");
-  const [invitations, setInvitations] = useState({ loading: true } as { loading?: boolean, data: any[] })
   const [friendsSearchResults, setFriendsSearchResults] = useState({ loading: true } as { loading?: boolean, data: any[] })
+  const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
+  const contactUsRef = useRef<HTMLIonModalElement>(null)
+  const [friendsList, setFriendsList] = useState({ loading: true } as { loading?: boolean, data: any[] })
+  useEffect(() => {
+    // (async () => {
+    //   const account = (await axios.get(`${baseUrl}/accounts/${services.authService.user?.id}`)).data //62dc92716bc26b9953a78dab
+
+    // })()
+  }, [])
 
   useEffect(() => {
     (async () => {
-      const pocketInvitations = (await axios.get(`${baseUrl}/invitations/${services.authService.user?.id}`)).data
-      const response = (await Promise.all(pocketInvitations.map(async (invite: any) => {
+      const friendsList = (await axios.get(`${baseUrl}/customers/${services.authService.user?.id}`)).data?.friendCustomerIds
+      const response = (await Promise.all(friendsList.map(async (friendCustomerId: any) => {
         try {
-          let call = await axios.get(`${baseUrl}/${invite.type === "FRIEND" ? "customers" : "accounts/details"}/${invite.fromId}`)
-          return { ...call.data, sentDate: invite.sentDateTime, inviteId: invite.id, type: invite.type }
+          let call = await axios.get(`${baseUrl}/${"customers"}/${friendCustomerId}`)
+          return { ...call.data }
         } catch (e) {
           return null
         }
       }))).filter(k => k)
-      console.log("HERE", response)
-      setInvitations({ data: response })
+      console.log("HERE2", response)
+      setFriendsList({ data: response })
     })()
   }, [])
-
-  const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
-  const contactUsRef = useRef<HTMLIonModalElement>(null)
-
-  const convertISOStringToMonthDay = (date: any) => {
-    const tempDate = new Date(date).toString().split(' ');
-    const formattedDate = `${tempDate[1]} ${+tempDate[2]}`;
-    return formattedDate;
-  };
-
-  const invitationsView = (type: "ACCOUNT" | "FRIEND") => {
-    const isAccount = () => type === "ACCOUNT"
-    return (invitations.data &&
-      <IonList>
-
-        {invitations.data.filter(k => k.type === type).map((invite, index) => {
-          const slidingItem = createRef<HTMLIonItemSlidingElement>()
-          return (
-            <IonItemSliding ref={slidingItem} key={index}>
-              <IonItem onClick={() => slidingItem.current?.open("end")}>
-                
-                  {!isAccount() &&
-                  <IonAvatar style={{marginRight: "5px"}}>
-                    <img src={`${baseUrl}/profile-pic/${invite.profilePicture}`} />
-                  </IonAvatar>}
-                <IonLabel>
-                  {isAccount() ? invite.title : `${invite.firstName} ${invite.lastName}`}
-                  {isAccount() && <p>{invite.description}</p>}
-                </IonLabel>
-                <IonNote slot="end">
-                  {convertISOStringToMonthDay(invite.sentDate)}
-                </IonNote>
-              </IonItem>
-              <IonItemOptions side="end">
-                <IonItemOption color="danger" onClick={async () => {
-                  await axios.delete(`${baseUrl}/invitations/${invite.inviteId}`)
-                  setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
-                }}>
-                <IonIcon slot="icon-only" icon={trash} />
-                
-                </IonItemOption>
-                <IonItemOption onClick={async () => {
-                  await axios.post(`${baseUrl}/invitations/${invite.inviteId}`)
-                  setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
-                }}>
-                  <IonIcon slot="icon-only" icon={checkbox} />
-                </IonItemOption>
-              </IonItemOptions>
-            </IonItemSliding>
-          )
-        }
-        )}
-
-      </IonList>
-    )
-  }
 
   return (
     <IonPage>
@@ -233,10 +186,37 @@ const Profile: React.FC = () => {
         </IonCard>
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Friend Requests</IonCardTitle>
+            <IonCardTitle>Friends</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {invitationsView("FRIEND")}
+            <IonList>
+              <IonItem>
+                <IonLabel>
+                  <h2><strong>Current Friends</strong></h2>
+                </IonLabel>
+              </IonItem>
+            {friendsList && friendsList?.data && 
+              friendsList.data.map((friend, index) => {
+                return <IonItem key={index}>
+                  <IonAvatar style={{marginRight: "5px"}}>
+                    <img src={`${baseUrl}/profile-pic/${friend.profilePicture}`} />
+                  </IonAvatar>
+                  <IonLabel>
+                    {`${friend.firstName} ${friend.lastName}`}
+                  </IonLabel>
+                </IonItem>
+              })
+            }
+            </IonList>
+            <IonList>
+              <IonItem>
+                <IonLabel>
+                  <h2><strong>Friend Requests</strong></h2>
+                </IonLabel>
+              </IonItem>
+            </IonList>
+            <Invitations type="FRIEND"></Invitations>
+            {/* {invitationsView("FRIEND")} */}
             <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block"><IonIcon slot="start" icon={personAddOutline} /> Add a Friend</IonButton>
 
             <IonModal ref={addAFriendModalRef}>
@@ -291,16 +271,16 @@ const Profile: React.FC = () => {
           </IonCardContent>
         </IonCard>
         {/* <h2>Pending Invites</h2> */}
-        <IonCard style={{ marginBottom: 150 }}>
+        <div style={{marginBottom: 150}}></div>
+        {/* <IonCard style={{ marginBottom: 150 }}>
           <IonCardHeader>
-            {/* <IonCardSubtitle><IonImg src={process.env.PUBLIC_URL + '/profile_pic.jpeg'} /></IonCardSubtitle> */}
             <IonCardTitle>Pending Invites</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {invitationsView("ACCOUNT")}
+            <Invitations type="ACCOUNT"></Invitations>
           </IonCardContent>
-        </IonCard>
-        <span style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white' }}>
+        </IonCard> */}
+        <span style={{ position: 'fixed', bottom: 0, width: '100%',  backgroundColor: 'white' }}>
           <IonButton fill='outline' style={{ margin: 16 }} onClick={async () => {
             await axios.post(`${baseUrl}/telnyx/${services.authService.user?.id}`)
             contactUsRef.current?.present()
