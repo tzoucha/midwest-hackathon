@@ -38,7 +38,7 @@ export const LoginPage = () => {
                     <IonLabel position="floating">Password</IonLabel>
                     <IonInput type='password' value={password} onIonChange={e => setPassword(e.detail.value!)} onKeyUp={signInOnEnter}/>
                   </IonItem>
-                  <IonButton style={{marginTop:25}} expand='block' onClick={signIn}>Login</IonButton>
+                  <IonButton style={{marginTop:25}} expand='block' shape="round" onClick={signIn}>Login</IonButton>
               </IonCardContent>
             </IonCard>
           </IonCol>
