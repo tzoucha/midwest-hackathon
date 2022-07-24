@@ -1,4 +1,5 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAccordion, IonAccordionGroup, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { heartCircleOutline, homeOutline } from 'ionicons/icons';
 import './pageStyles.css';
 
 const Dashboard: React.FC = () => {
@@ -6,65 +7,98 @@ const Dashboard: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>App Logo Here</IonTitle>
+          <IonTitle>
+              <img src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonGrid>
           <IonRow className="ion-align-items-center">
-            <IonCol style={{textAlign: 'center'}}>
-              <h1>Welcome</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <IonCol>
+              <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, Damen!</h1>
+              <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by creating a POCKET.</p>
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonCard>
-                <IonCardHeader>Company Charity Goal</IonCardHeader>
-                <IonCardContent>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus.</p>
-                  <IonProgressBar value={0.5}></IonProgressBar>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size='12'>
-              <h2>Accounts</h2>
-            </IonCol>
-            <IonCol>
-              {/* Loop through cards for accounts */}
-                <IonCard> 
-                  <IonCardHeader>
+          <IonAccordionGroup>
+            <IonAccordion value="first">
+              <IonItem slot="header" color="light">
+                <IonGrid>
+                  <IonRow className='ion-align-items-center'>
+                    <IonCol size='auto'>
+                      <IonIcon icon={heartCircleOutline} style={{fontSize:30, paddingTop:5}} className='darkGray'></IonIcon>
+                    </IonCol>
+                    <IonCol>
+                    <IonLabel className='darkGray'>
+                      Featured Charity Pocket
+                    </IonLabel>
+                    </IonCol>
+                  </IonRow>
+                </IonGrid>
+              </IonItem>
+              <div slot="content">
+                <IonCard>
+                  <IonCardHeader><strong style={{fontSize: 18}}>Wounded Warriors Project</strong></IonCardHeader>
+                  <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
                       <IonRow>
-                        <IonCol>
-                          Profile image
+                        <IonCol size="3">
+                          <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
                         </IonCol>
                         <IonCol>
-                          Amount / Goal
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardHeader>
-                  <IonCardContent>
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol size='12'>
-                          Account Name
-                        </IonCol>
-                        <IonCol size='12'>
-                          Goal description
+                        <p style={{marginBottom:10}}> Quarterly Charity Pocket, PC will will match all contributions until goal is fulfilled.</p>
                         </IonCol>
                       </IonRow>
                       <IonRow>
-                        <IonCol>Participant images</IonCol>
-                        <IonCol>Arrow Icon</IonCol>
+                        <IonCol size='12'>
+                          <IonProgressBar value={0.15}></IonProgressBar>
+                        </IonCol>
+                        <IonCol style={{textAlign: 'right'}}>$10,459 raised out of $69,420 goal</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol style={{textAlign:'right'}}>
+                          <IonButton fill='outline' size='small'>View Pocket</IonButton>
+                        </IonCol>
                       </IonRow>
                     </IonGrid>
                   </IonCardContent>
                 </IonCard>
-                <IonButton expand="block" onClick={() => window.location.href="/create-goal"}>Create Goal</IonButton>
+              </div>
+            </IonAccordion>
+          </IonAccordionGroup>
+          <IonRow>
+            <IonCol size='12'>
+              <h2 className='darkGray' style={{marginBottom:5}}>Your Pockets</h2>
+            </IonCol>
+            <IonCol>
+              {/* Loop through cards for accounts */}
+                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderLeftWidth:'4px'}}>
+                  <IonCardHeader><strong style={{fontSize: 18}}>Pocket Name</strong></IonCardHeader>
+                  <IonCardContent style={{paddingBottom:5}}>
+                    <IonGrid>
+                      <IonRow>
+                        <IonCol size="2">
+                          <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
+                        </IonCol>
+                        <IonCol>
+                        <p style={{marginBottom:10}}> Pocket description...</p>
+                        </IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol size='12'>
+                          <IonProgressBar value={0.15}></IonProgressBar>
+                        </IonCol>
+                        <IonCol style={{textAlign: 'right'}}>$0 raised out of $0,000 goal</IonCol>
+                      </IonRow>
+                      <IonRow>
+                        <IonCol style={{textAlign:'right'}}>
+                          <IonButton color='secondary' shape="round" expand="block" size='small'>View Pocket</IonButton>
+                        </IonCol>
+                      </IonRow>
+                    </IonGrid>
+                  </IonCardContent>
+                </IonCard>
+                <IonButton expand="block" href="/create-goal">Create Goal</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>

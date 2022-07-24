@@ -9,7 +9,9 @@
  */
 package com.hackmidwest.milliteambackend.service;
 
+import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.model.Transaction;
+import com.hackmidwest.milliteambackend.repo.AccountRepository;
 import com.hackmidwest.milliteambackend.repo.TransactionRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +19,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionService {
-  TransactionRepository transactionRepository;
+  public TransactionRepository transactionRepository;
+  public AccountRepository accountRepository;
 
   public TransactionService(
-      TransactionRepository transactionRepository) {
+      TransactionRepository transactionRepository,
+      AccountRepository accountRepository) {
     this.transactionRepository = transactionRepository;
+    this.accountRepository = accountRepository;
   }
 
   public List<Transaction> getTransactionsForAccount(String accountId){
@@ -32,6 +37,18 @@ public class TransactionService {
   }
 
   public Transaction createTransaction(Transaction transaction){
+    if(accountRepository.findById(transaction.getFromAccountId()).isPresent()) {
+      Account fromAccount = accountRepository.findById(transaction.getFromAccountId()).get();
+      fromAccount.setBalance(fromAccount.getBalance().subtract(transaction.getAmount()));
+      accountRepository.save(fromAccount);
+    }
+
+    if(accountRepository.findById(transaction.getToAccountId()).isPresent()){
+      Account toAccount = accountRepository.findById(transaction.getToAccountId()).get();
+      toAccount.setBalance(toAccount.getBalance().add(transaction.getAmount()));
+      accountRepository.save(toAccount);
+    }
+
     return transactionRepository.save(transaction);
   }
 }

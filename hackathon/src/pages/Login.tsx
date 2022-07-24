@@ -24,27 +24,23 @@ export const LoginPage = () => {
         <IonRow>
           <IonCol size='12'>
             <IonCard>
-              {/* <IonCardHeader style={{textAlign: 'center'}}>
-                <h1>Login</h1>
-              </IonCardHeader> */}
               <IonCardHeader style={{backgroundColor: '#9997ea'}}>
-                <IonImg style={{filter: 'brightness(0) invert(1)'}} src={process.env.PUBLIC_URL + '/assets/logo.png'} />
+                <img style={{filter: 'brightness(0) invert(1)'}} src={process.env.PUBLIC_URL + '/assets/logo.png'} />
               </IonCardHeader>
               <IonCardContent>
                   <h1 style={{marginTop: 15}}>Login</h1>
-                  <IonItem>
-                    <IonLabel position="stacked">Username</IonLabel>
-                    <IonInput value={username} placeholder="Username" onIonChange={e => setUsername(e.detail.value!)} onKeyUp={signInOnEnter}/>
+                  <IonItem style={{marginLeft: -20}}>
+                    <IonLabel position="floating">Username</IonLabel>
+                    <IonInput value={username} onIonChange={e => setUsername(e.detail.value!)} onKeyUp={signInOnEnter}/>
                   </IonItem>
-                  <IonItem>
-                    <IonLabel position="stacked">Password</IonLabel>
-                    <IonInput type='password' value={password} placeholder='Password' onIonChange={e => setPassword(e.detail.value!)} onKeyUp={signInOnEnter}/>
+                  <IonItem style={{marginLeft: -20}}>
+                    <IonLabel position="floating">Password</IonLabel>
+                    <IonInput type='password' value={password} onIonChange={e => setPassword(e.detail.value!)} onKeyUp={signInOnEnter}/>
                   </IonItem>
-                  <IonButton expand='full' shape='round' onClick={signIn}>Login</IonButton>
+                  <IonButton style={{marginTop:25}} expand='block' shape="round" onClick={signIn}>Login</IonButton>
               </IonCardContent>
             </IonCard>
           </IonCol>
-          <IonCol></IonCol>
         </IonRow>
       </IonGrid>
     </IonContent>

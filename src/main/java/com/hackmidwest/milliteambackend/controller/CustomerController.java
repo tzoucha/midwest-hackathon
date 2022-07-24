@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +39,12 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-    return ResponseEntity.ok(customerService.createCustomer(customer));
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
   }
 
   @PostMapping("/login")

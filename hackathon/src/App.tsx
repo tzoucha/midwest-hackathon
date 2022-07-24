@@ -40,7 +40,9 @@ import { AUTH_CHANGE_EVENT } from './services/auth.service';
 import { useServices } from './services/providers';
 import './theme/variables.css';
 
-setupIonicReact();
+setupIonicReact({
+  scrollAssist: false
+});
 
 const AuthChooser = () => {
   const services = useServices();

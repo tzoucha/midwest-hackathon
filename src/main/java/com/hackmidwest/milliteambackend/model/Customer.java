@@ -9,6 +9,7 @@
  */
 package com.hackmidwest.milliteambackend.model;
 
+import java.util.List;
 import org.springframework.data.annotation.Id;
 
 public class Customer {
@@ -25,6 +26,7 @@ public class Customer {
   public String state;
   public String zipCode;
   public String phoneNumber;
+  public List<String> friendCustomerIds;
 
   public String getId() {
     return id;
@@ -122,6 +124,15 @@ public class Customer {
 
   public Customer setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  public List<String> getFriendCustomerIds() {
+    return friendCustomerIds;
+  }
+
+  public Customer setFriendCustomerIds(List<String> friendCustomerIds) {
+    this.friendCustomerIds = friendCustomerIds;
     return this;
   }
 }
