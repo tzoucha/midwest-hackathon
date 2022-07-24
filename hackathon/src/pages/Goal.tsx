@@ -48,7 +48,7 @@ const Goal: React.FC = () => {
           <IonRow>
             <IonCol size='12' style={{textAlign: 'center'}}>
               <IonAvatar style={{width: 'auto', height: 'auto'}}>
-                <img src={`${baseUrl}/profile-pic/${pocketInfo.data.picture}`} />
+                <img style={{border: `6px ${(pocketInfo.data.color || 'black')} solid`}} src={`${baseUrl}/profile-pic/${pocketInfo.data.picture}`} />
                 {/* <IonButton color='light' style={{position: 'absolute', top: 0, right: 0}} onClick={() => filePicker.current?.click()}><IonIcon icon={createOutline} size='large' /></IonButton> */}
               </IonAvatar>
             </IonCol>
