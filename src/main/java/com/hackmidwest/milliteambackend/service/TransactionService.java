@@ -10,8 +10,10 @@
 package com.hackmidwest.milliteambackend.service;
 
 import com.hackmidwest.milliteambackend.model.Account;
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.model.Transaction;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
+import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import com.hackmidwest.milliteambackend.repo.TransactionRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +23,28 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
   public TransactionRepository transactionRepository;
   public AccountRepository accountRepository;
+  public CustomerRepository customerRepository;
 
   public TransactionService(
       TransactionRepository transactionRepository,
-      AccountRepository accountRepository) {
+      AccountRepository accountRepository,
+      CustomerRepository customerRepository) {
     this.transactionRepository = transactionRepository;
     this.accountRepository = accountRepository;
+    this.customerRepository = customerRepository;
   }
 
   public List<Transaction> getTransactionsForAccount(String accountId){
     List<Transaction> ret = new ArrayList<>();
     ret.addAll(transactionRepository.findByFromAccountId(accountId));
     ret.addAll(transactionRepository.findByToAccountId(accountId));
+
+    ret.forEach(transaction -> {
+      Customer customer = customerRepository.findById(transaction.getExecutingCustomerId()).get();
+      transaction.setName(customer.firstName + " " + customer.lastName);
+      transaction.setProfilePicture(customer.getProfilePicture());
+    });
+
     return ret;
   }
 
@@ -50,5 +62,9 @@ public class TransactionService {
     }
 
     return transactionRepository.save(transaction);
+  }
+
+  public void dropAllTransactions(){
+    transactionRepository.deleteAll();
   }
 }
