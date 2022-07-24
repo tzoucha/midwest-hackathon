@@ -16,12 +16,12 @@ const Dashboard: React.FC = () => {
       setPocketInfo({data: pockets})
     })()
   }, [])
-  // useEffect(() => {
-  //   (async () => {
-  //     const pocket = (await axios.get(`${baseUrl}/accounts/details/62dcb3e0e53d9f1a3c7e7498`)).data
-  //     setQuarterlyPocketInfo({data: pocket})
-  //   })()
-  // }, [])
+  useEffect(() => {
+    (async () => {
+      const pocket = (await axios.get(`${baseUrl}/accounts/details/62dcb3e0e53d9f1a3c7e7498`)).data
+      setQuarterlyPocketInfo({data: pocket})
+    })()
+  }, [])
   return (
     <IonPage>
       <IonHeader>
@@ -63,27 +63,27 @@ const Dashboard: React.FC = () => {
                 </IonGrid>
               </IonItem>
               <div slot="content">
-                <IonCard>
-                  <IonCardHeader style={{backgroundColor: '#e8e8e8'}}><strong style={{fontSize: 18}}>{quarterlyPocketInfo.data.title}</strong></IonCardHeader>
+                <IonCard style={{marginTop: 10, borderWidth: '2px 6px 4px 2px', borderStyle: 'solid', borderColor: quarterlyPocketInfo?.data.color, borderImage: 'initial', borderBottomRightRadius: '20%'}}>
+                  <IonCardHeader style={{backgroundColor: '#f4f5f8'}}><strong style={{fontSize: 18}}>{quarterlyPocketInfo?.data.title}</strong></IonCardHeader>
                   <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
                       <IonRow>
-                        <IonCol size="3">
+                        <IonCol size="2">
                           <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
                         </IonCol>
                         <IonCol>
-                        <p style={{marginBottom:10}}> Quarterly Charity Pocket, PC will will match all contributions until goal is fulfilled.</p>
+                        <p style={{marginBottom:10}}>{quarterlyPocketInfo?.data.description}</p>
                         </IonCol>
                       </IonRow>
                       <IonRow>
                         <IonCol size='12'>
-                          <IonProgressBar value={0.15} style={{'--background': '#f4f5f8'}}></IonProgressBar>
+                          <IonProgressBar value={(quarterlyPocketInfo?.data.balance || 0) / (quarterlyPocketInfo?.data.goal || 1)} style={{'--progress-background': quarterlyPocketInfo?.data.color || 'black', '--background': '#f4f5f8'}}></IonProgressBar>
                         </IonCol>
-                        <IonCol style={{textAlign: 'right'}}>$10,459 raised out of $69,420 goal</IonCol>
+                        <IonCol style={{textAlign: 'right'}}><strong>{(quarterlyPocketInfo?.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(quarterlyPocketInfo?.data.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                       </IonRow>
                       <IonRow>
                         <IonCol style={{textAlign:'right'}}>
-                          <IonButton fill='outline' size='small' shape="round">View Pocket</IonButton>
+                          <IonButton style={{'--background':quarterlyPocketInfo?.data.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${quarterlyPocketInfo?.data.id}`}>View Pocket</IonButton>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
                           <IonCol size='12'>
                             <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'--progress-background': pocket.color || 'black', '--background': '#f4f5f8'}}></IonProgressBar>
                           </IonCol>
-                          <IonCol style={{textAlign: 'right'}}>{(pocket.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})} raised out of {(pocket.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
+                          <IonCol style={{textAlign: 'right'}}><strong>{(pocket.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong> raised of {(pocket.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
                         </IonRow>
                         <IonRow>
                           <IonCol style={{textAlign:'right'}}>
