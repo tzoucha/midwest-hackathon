@@ -1,8 +1,20 @@
 import { IonAccordion, IonAccordionGroup, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { addCircleOutline, heartCircleOutline, homeOutline } from 'ionicons/icons';
-import './pageStyles.css';
+import axios from 'axios';
+import { heartCircleOutline, addCircleOutline } from 'ionicons/icons';
+import { useState, useEffect } from 'react';
+import { baseUrl } from '../services/http.service';
+import { useServices } from '../services/providers';
+
 
 const Dashboard: React.FC = () => {
+  const services = useServices();
+  const [pocketInfo, setPocketInfo] = useState({loading: true} as {loading?: boolean, data: any[]})
+  useEffect(() => {
+    (async () => {
+      const pockets = (await axios.get(`${baseUrl}/accounts/${services.authService.user?.id}`)).data
+      setPocketInfo({data: pockets})
+    })()
+  }, [])
   return (
     <IonPage>
       <IonHeader>
@@ -75,39 +87,43 @@ const Dashboard: React.FC = () => {
           </IonAccordionGroup>
           <IonRow>
             <IonCol size='12'>
-              <h2 className='darkGray' style={{marginBottom:5}}>Your Pockets</h2>
-            </IonCol>
-            <IonCol>
-              {/* Loop through cards for accounts */}
-                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderRightWidth:'6px',borderBottomWidth:'4px'}}>
-                  <IonCardHeader style={{backgroundColor: '#f4f5f8'}}><strong style={{fontSize: 18}}>Pocket Name</strong></IonCardHeader>
-                  <IonCardContent style={{paddingBottom:5}}>
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol size="2">
-                          <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
-                        </IonCol>
-                        <IonCol>
-                        <p style={{marginBottom:10}}> Pocket description...</p>
-                        </IonCol>
-                      </IonRow>
-                      <IonRow>
-                        <IonCol size='12'>
-                          <IonProgressBar value={0.15} style={{'--progress-background': 'pink', '--background': '#f4f5f8'}}></IonProgressBar>
-                        </IonCol>
-                        <IonCol style={{textAlign: 'right'}}>$0 raised out of $0,000 goal</IonCol>
-                      </IonRow>
-                      <IonRow>
-                        <IonCol style={{textAlign:'right'}}>
-                          <IonButton style={{'--background':'pink', '--background-activated':'#ccc'}} shape="round" expand="block" size='small'>View Pocket</IonButton>
-                        </IonCol>
-                      </IonRow>
-                    </IonGrid>
-                  </IonCardContent>
-                </IonCard>
-                <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
+              <h2 className='darkGray' style={{marginBottom:5}}>Your Pocket(s)</h2>
             </IonCol>
           </IonRow>
+          {pocketInfo.loading ? "LOADING" : pocketInfo.data.map((pocket) => 
+            <IonRow key={pocket.id}>
+              <IonCol>
+                {/* Loop through cards for accounts */}
+                  <IonCard style={{marginTop: 10, borderWidth: '2px 6px 4px 2px', borderStyle: 'solid', borderColor: pocket.color, borderImage: 'initial', borderBottomRightRadius: '20%'}}>
+                    <IonCardHeader style={{backgroundColor: '#f4f5f8'}}><strong style={{fontSize: 18}}>{pocket.title}</strong></IonCardHeader>
+                    <IonCardContent style={{paddingBottom:5}}>
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol size="2">
+                            <img src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
+                          </IonCol>
+                          <IonCol>
+                          <p style={{marginBottom:10}}>{pocket.description}</p>
+                          </IonCol>
+                        </IonRow>
+                        <IonRow>
+                          <IonCol size='12'>
+                            <IonProgressBar value={(pocket.balance || 0) / (pocket.goal || 1)} style={{'--progress-background': pocket.color || 'black', '--background': '#f4f5f8'}}></IonProgressBar>
+                          </IonCol>
+                          <IonCol style={{textAlign: 'right'}}>{(pocket.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})} raised out of {(pocket.goal || 0).toLocaleString("en-US", {style:"currency", currency:"USD"})} goal</IonCol>
+                        </IonRow>
+                        <IonRow>
+                          <IonCol style={{textAlign:'right'}}>
+                            <IonButton style={{'--background':pocket.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${pocket.id}`}>View Pocket</IonButton>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonCardContent>
+                  </IonCard>
+              </IonCol>
+            </IonRow>
+          )}
+          <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
         </IonGrid>
       </IonContent>
     </IonPage>
