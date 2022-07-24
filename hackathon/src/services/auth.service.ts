@@ -19,7 +19,19 @@ const USER_TOKEN_KEY = 'user_token';
 //   }
 // }
 export class AuthService {
-  user?: string;
+  user?: {
+    id: String,
+    firstName: String,
+    lastName: String,
+    password: String,
+    profilePicture: String,
+    emailAddress: String,
+    addressLine1: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    phoneNumber: String,
+  };
   private initialized?: Promise<void>;
 
   constructor() {
@@ -55,7 +67,7 @@ export class AuthService {
     }
   }
   async logout() {
-    this.user = '';
+    this.user = undefined;
     await storageService.storage.remove(USER_TOKEN_KEY);
     document.dispatchEvent(new Event(AUTH_CHANGE_EVENT))
   }

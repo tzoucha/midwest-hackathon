@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
                     </IonGrid>
                   </IonCardContent>
                 </IonCard>
-                <IonButton expand="block">Create New Shared Goal</IonButton>
+                <IonButton expand="block" onClick={() => window.location.href="/create-goal"}>Create Goal</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
