@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 public class Customer {
   @MongoId
-  public String _id;
+  public String id;
   public String firstName;
   public String lastName;
   public String password;
@@ -28,11 +28,11 @@ public class Customer {
   public List<String> friendCustomerIds;
 
   public String getId() {
-    return _id;
+    return id;
   }
 
   public Customer setId(String id) {
-    this._id = id;
+    this.id = id;
     return this;
   }
 
