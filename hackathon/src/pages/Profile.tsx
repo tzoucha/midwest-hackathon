@@ -7,6 +7,7 @@ import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
 import axios from 'axios';
+import Invitations from '../components/Invitations';
 
 const Profile: React.FC = () => {
   const services = useServices();
@@ -236,7 +237,8 @@ const Profile: React.FC = () => {
             <IonCardTitle>Friend Requests</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {invitationsView("FRIEND")}
+            <Invitations type="FRIEND"></Invitations>
+            {/* {invitationsView("FRIEND")} */}
             <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block"><IonIcon slot="start" icon={personAddOutline} /> Add a Friend</IonButton>
 
             <IonModal ref={addAFriendModalRef}>
@@ -291,16 +293,16 @@ const Profile: React.FC = () => {
           </IonCardContent>
         </IonCard>
         {/* <h2>Pending Invites</h2> */}
-        <IonCard style={{ marginBottom: 150 }}>
+        <div style={{marginBottom: 150}}></div>
+        {/* <IonCard style={{ marginBottom: 150 }}>
           <IonCardHeader>
-            {/* <IonCardSubtitle><IonImg src={process.env.PUBLIC_URL + '/profile_pic.jpeg'} /></IonCardSubtitle> */}
             <IonCardTitle>Pending Invites</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {invitationsView("ACCOUNT")}
+            <Invitations type="ACCOUNT"></Invitations>
           </IonCardContent>
-        </IonCard>
-        <span style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white' }}>
+        </IonCard> */}
+        <span style={{ position: 'fixed', bottom: 0, width: '100%',  backgroundColor: 'white' }}>
           <IonButton fill='outline' style={{ margin: 16 }} onClick={async () => {
             await axios.post(`${baseUrl}/telnyx/${services.authService.user?.id}`)
             contactUsRef.current?.present()
