@@ -13,20 +13,21 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-@CompoundIndex(def = "{'firstName':1, 'lastName':-1, 'emailAddress':1}", name = "compound_index")
 public class Customer {
   public String id;
 
+  @TextIndexed(weight=1)
   public String firstName;
-
+  @TextIndexed(weight=1)
   public String lastName;
 
   public String password;
   public String profilePicture;
-
+  @TextIndexed(weight=1)
   public String emailAddress;
   public String addressLine1;
   public String city;
