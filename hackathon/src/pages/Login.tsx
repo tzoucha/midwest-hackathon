@@ -9,7 +9,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('')
   const signIn = async () => {
     await present('Signing in...')
-    console.log("SIGN IN ATTEMPT", username, password)
+    // console.log("SIGN IN ATTEMPT", username, password)
     await services.authService.login(username, password);
     dismiss();
   }

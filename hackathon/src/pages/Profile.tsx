@@ -136,7 +136,7 @@ const Profile: React.FC = () => {
             <input type="file" style={{ display: 'none' }} ref={filePicker} onChange={async (e) => {
               const file = e.target.files?.[0]
               if (file) {
-                present();
+                await present();
                 var data = new FormData();
                 data.append('image', file);
                 data.append('id', services.authService.user?.id || '');
