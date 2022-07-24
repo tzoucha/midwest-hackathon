@@ -21,7 +21,7 @@ export const CreateGoal = () => {
       ...values,
       customerIds: [],
       balance: 0,
-      primaryOwnerAccountId: services.authService.user?.id,
+      primaryOwnerCustomerId: services.authService.user?.id,
       startDate: new Date().toISOString().split('T')[0],
       endDate: values.endDate ? new Date(values.endDate).toISOString().split('T')[0] : undefined
     }
