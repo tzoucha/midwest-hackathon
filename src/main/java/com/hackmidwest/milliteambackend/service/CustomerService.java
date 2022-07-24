@@ -14,12 +14,32 @@ import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
 
   private CustomerRepository customerRepository;
+
+  @Autowired
+  private MongoTemplate mongoTemplate;
+
+  public List<Customer> fullTextSearch(String searchPhrase) {
+    TextCriteria criteria = TextCriteria
+            .forDefaultLanguage()
+            .matchingPhrase(searchPhrase);
+
+    Query query = TextQuery.queryText(criteria).sortByScore();
+
+    List<Customer> customers = mongoTemplate.find(query, Customer.class);
+
+    return customers;
+  }
 
   public CustomerService(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
