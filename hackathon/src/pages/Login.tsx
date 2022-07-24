@@ -19,25 +19,25 @@ export const LoginPage = () => {
     }
   }
   return (<IonPage>
-    <IonContent fullscreen>
-      <IonGrid>
-        <IonRow>
+    <IonContent fullscreen style={{height: '100%'}}>
+      <IonGrid style={{height: '100%'}}>
+        <IonRow className='ion-align-items-center'>
           <IonCol size='12'>
             <IonCard>
-              <IonCardHeader style={{backgroundColor: '#9997ea'}}>
+              <IonCardHeader style={{backgroundColor: '#42b95c'}}>
                 <img style={{filter: 'brightness(0) invert(1)'}} src={process.env.PUBLIC_URL + '/assets/logo.png'} />
               </IonCardHeader>
               <IonCardContent>
                   <h1 style={{marginTop: 15}}>Login</h1>
-                  <IonItem style={{marginLeft: -20}}>
+                  <IonItem>
                     <IonLabel position="floating">Username</IonLabel>
                     <IonInput value={username} onIonChange={e => setUsername(e.detail.value!)} onKeyUp={signInOnEnter}/>
                   </IonItem>
-                  <IonItem style={{marginLeft: -20}}>
+                  <IonItem style={{marginTop: 20}}>
                     <IonLabel position="floating">Password</IonLabel>
                     <IonInput type='password' value={password} onIonChange={e => setPassword(e.detail.value!)} onKeyUp={signInOnEnter}/>
                   </IonItem>
-                  <IonButton style={{marginTop:25}} expand='block' shape="round" onClick={signIn}>Login</IonButton>
+                  <IonButton style={{marginTop:55}} expand='block' shape="round" onClick={signIn}>Login</IonButton>
               </IonCardContent>
             </IonCard>
           </IonCol>

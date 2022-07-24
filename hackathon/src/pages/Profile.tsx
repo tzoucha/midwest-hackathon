@@ -198,9 +198,9 @@ const Profile: React.FC = () => {
               <IonLabel position="floating">Phone</IonLabel>
               <IonInput readonly={readOnly} pattern="tel" value={phone} onIonChange={e => setPhone(e.detail.value!)}></IonInput>
             </IonItem>
-            <div style={{ marginBottom: "10px", paddingLeft: "10px" }}>
+            {/* <div style={{ marginBottom: "10px", paddingLeft: "10px" }}>
               {bio.map((k, i) => <p key={i}>{k}</p>)}
-            </div>
+            </div> */}
             {readOnly ?
               <IonButton onClick={() => setReadOnly(!readOnly)} expand="block"><IonIcon slot="start" icon={createOutline} /> Edit Profile</IonButton> :
               <>
@@ -233,7 +233,7 @@ const Profile: React.FC = () => {
         </IonCard>
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Add a Friend</IonCardTitle>
+            <IonCardTitle>Friend Requests</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             {invitationsView("FRIEND")}
@@ -245,12 +245,7 @@ const Profile: React.FC = () => {
                   <IonButtons slot="start">
                     <IonButton onClick={() => addAFriendModalRef.current?.dismiss()}>Cancel</IonButton>
                   </IonButtons>
-                  <IonTitle>Welcome</IonTitle>
-                  <IonButtons slot="end">
-                    <IonButton strong={true} onClick={() => { console.log("CONFIRM ADD FRIEND") }}>
-                      Confirm
-                    </IonButton>
-                  </IonButtons>
+                  <IonTitle>Friends</IonTitle>
                 </IonToolbar>
               </IonHeader>
               <IonContent className="ion-padding">
@@ -281,6 +276,7 @@ const Profile: React.FC = () => {
                               present()
                               await axios.post(`${baseUrl}/invitations/friend?toCustomer=${result.id}&fromCustomer=${services.authService.user?.id}`)
                               dismiss()
+                              addAFriendModalRef.current?.dismiss()
                             }}>Add</IonButton>
                             {/* <IonLabel>{result.firstName}</IonLabel> */}
                           </IonItem>
