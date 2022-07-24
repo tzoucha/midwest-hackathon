@@ -36,12 +36,12 @@ public class AccountController {
   }
 
   @GetMapping("/{customerId}")
-  public ResponseEntity<Set<Account>> findAccountsForCustomer(String customerId){
+  public ResponseEntity<Set<Account>> findAccountsForCustomer(@PathVariable String customerId){
     return ResponseEntity.ok(accountService.findAccountsForCustomer(customerId));
   }
 
   @GetMapping("/details/{accountId}")
-  public ResponseEntity<Account> findAccountById(String accountId){
+  public ResponseEntity<Account> findAccountById(@PathVariable String accountId){
     return ResponseEntity.ok(accountService.findAccountByAccountId(accountId));
   }
 
