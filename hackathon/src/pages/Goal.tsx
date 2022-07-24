@@ -206,12 +206,12 @@ const Goal: React.FC = () => {
           {tranView === 'leaderboard' && 
           <>
           {/* <IonList> */}
-            {leaderboard.data?.contributors.sort((a:any, b:any) => a.contribution - b.contribution).map((k:any, index:number) => 
+            {leaderboard.data?.contributors.sort((a:any, b:any) => b.contribution - a.contribution).map((k:any, index:number) => 
                <IonItem key={index}>
                <IonAvatar style={{ marginRight: "10px" }}>
                  <img src={`${baseUrl}/profile-pic/${k.profilePicture}`} />
                </IonAvatar>
-               <IonLabel><h2>{k.name}</h2><IonProgressBar value={leaderboard.data.balance / k.contribution / 100}></IonProgressBar></IonLabel>
+               <IonLabel><h2>{k.name}</h2><IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar></IonLabel>
                
                {/* <IonLabel>{result.firstName}</IonLabel> */}
              </IonItem>
