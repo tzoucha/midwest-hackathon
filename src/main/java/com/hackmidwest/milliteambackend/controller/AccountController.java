@@ -11,7 +11,7 @@ package com.hackmidwest.milliteambackend.controller;
 
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.service.AccountService;
-import java.util.List;
+import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,7 @@ public class AccountController {
   }
 
   @GetMapping("/{customerId}")
-  public ResponseEntity<List<Account>> findAccountsForCustomer(String customerId){
+  public ResponseEntity<Set<Account>> findAccountsForCustomer(String customerId){
     return ResponseEntity.ok(accountService.findAccountsForCustomer(customerId));
   }
 
