@@ -1,5 +1,5 @@
 import { IonAccordion, IonAccordionGroup, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonProgressBar, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { heartCircleOutline, homeOutline } from 'ionicons/icons';
+import { addCircleOutline, heartCircleOutline, homeOutline } from 'ionicons/icons';
 import './pageStyles.css';
 
 const Dashboard: React.FC = () => {
@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
                 <IonGrid>
                   <IonRow className='ion-align-items-center'>
                     <IonCol size='auto'>
-                      <IonIcon icon={heartCircleOutline} style={{fontSize:30, paddingTop:5}} className='darkGray'></IonIcon>
+                      <IonIcon icon={heartCircleOutline} style={{fontSize:30, paddingTop:5, color: '#ed7b9e'}}></IonIcon>
                     </IonCol>
                     <IonCol>
                     <IonLabel className='darkGray'>
@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
               </IonItem>
               <div slot="content">
                 <IonCard>
-                  <IonCardHeader><strong style={{fontSize: 18}}>Wounded Warriors Project</strong></IonCardHeader>
+                  <IonCardHeader style={{backgroundColor: '#e8e8e8'}}><strong style={{fontSize: 18}}>Wounded Warriors Project</strong></IonCardHeader>
                   <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
                       <IonRow>
@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol style={{textAlign:'right'}}>
-                          <IonButton fill='outline' size='small'>View Pocket</IonButton>
+                          <IonButton fill='outline' size='small' shape="round">View Pocket</IonButton>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
@@ -72,8 +72,8 @@ const Dashboard: React.FC = () => {
             </IonCol>
             <IonCol>
               {/* Loop through cards for accounts */}
-                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderLeftWidth:'4px'}}>
-                  <IonCardHeader><strong style={{fontSize: 18}}>Pocket Name</strong></IonCardHeader>
+                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderLeftWidth:'6px'}}>
+                  <IonCardHeader style={{backgroundColor: '#f4f5f8'}}><strong style={{fontSize: 18}}>Pocket Name</strong></IonCardHeader>
                   <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
                       <IonRow>
@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
                     </IonGrid>
                   </IonCardContent>
                 </IonCard>
-                <IonButton expand="block" shape="round">Open New Pocket</IonButton>
+                <IonButton expand="block" shape="round"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
