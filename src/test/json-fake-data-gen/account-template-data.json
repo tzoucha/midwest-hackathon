@@ -5,12 +5,12 @@
       "62dc9271259bff25f586f167","62dc9271aa32c0c1926cfc34"
     ],
     "balance": "723.80",
-    "primaryOwnerCustomerId": "62dcb3e0740681def17e8477",
+    "primaryOwnerCustomerId": "62dc9271ce855b907f8d4f97",
     "description": "Party with they boyzz",
     "picture": "1a83701c-be31-4c48-b76b-a196b6b72656",
     "goal": "1200.00",
-    "startDate": "2022-01-04",
-    "endDate": "2013-04-10",
+    "startDate": "2013-01-04",
+    "endDate": "2022-04-10",
     "color": "#F44336",
     "title": "Beer Fund",
     "_class": "com.hackmidwest.milliteambackend.model.Account"

@@ -10,6 +10,7 @@
 package com.hackmidwest.milliteambackend.controller;
 
 import com.hackmidwest.milliteambackend.model.Customer;
+import com.hackmidwest.milliteambackend.model.LeaderBoard;
 import com.hackmidwest.milliteambackend.model.Transaction;
 import com.hackmidwest.milliteambackend.service.TransactionService;
 import java.util.List;
@@ -49,6 +50,11 @@ public class TransactionController {
   public ResponseEntity<Customer> dropAllCustomers(){
     transactionService.dropAllTransactions();
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
+  @GetMapping("/leaderboard/{accountId}")
+  public ResponseEntity<LeaderBoard> getLeaderboard(@PathVariable String accountId){
+    return ResponseEntity.ok(transactionService.generateAccountLeaderboard(accountId));
   }
 
 }

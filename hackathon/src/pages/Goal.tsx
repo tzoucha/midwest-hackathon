@@ -17,7 +17,7 @@ const Goal: React.FC = () => {
   const [readOnly, setReadOnly] = useState(true)
   const [friendSearch, setFriendSearch] = useState<string>("");
   const [friendsSearchResults, setFriendsSearchResults] = useState({ loading: true } as { loading?: boolean, data: any[] })
-
+  const [leaderboard, setLeaderBoard] = useState({ loading: true } as { loading?: boolean, data: any[] })
   const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
   useEffect(() => {
     if (goalUID) {

@@ -1,40 +1,61 @@
 [{
-  "_id": {
-    "$oid": "62dc845e572ca5408f5e5301"
-  },
-  "amount": "50",
+  "amount": "168.42",
   "fromAccountId": "",
   "toAccountId": "62dcb3e0244aaff5d2ff0771",
   "description": "Transfer",
   "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
-  "executingCustomerId": "62dc9271157b8d7fd5f07d76",
+  "executingCustomerId": "62dc9271259bff25f586f167",
   "name": "Hattie Caldwell",
   "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
   "_class": "com.hackmidwest.milliteambackend.model.Transaction"
 },{
-  "_id": {
-    "$oid": "62dc8c291c675401d30dc714"
-  },
-  "amount": "50",
+  "amount": "26.88",
   "fromAccountId": "",
   "toAccountId": "62dcb3e0244aaff5d2ff0771",
   "description": "Transfer",
   "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
-  "executingCustomerId": "62dc92716bc26b9953a78dab",
+  "executingCustomerId": "62dc9271aa32c0c1926cfc34",
   "name": "Damen Abbott",
   "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
   "_class": "com.hackmidwest.milliteambackend.model.Transaction"
 },{
-  "_id": {
-    "$oid": "62dc8c3f1c675401d30dc715"
-  },
-  "amount": "50",
+  "amount": "236.89",
   "fromAccountId": "",
   "toAccountId": "62dcb3e0244aaff5d2ff0771",
   "description": "Transfer",
   "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
-  "executingCustomerId": "62dc927115da4f70866876b8",
+  "executingCustomerId": "62dc9271aa32c0c1926cfc34",
   "name": "Ferrell Atkins",
+  "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
+  "_class": "com.hackmidwest.milliteambackend.model.Transaction"
+},{
+  "amount": "32.48",
+  "fromAccountId": "",
+  "toAccountId": "62dcb3e0244aaff5d2ff0771",
+  "description": "Transfer",
+  "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
+  "executingCustomerId": "62dc9271ce855b907f8d4f97",
+  "name": "Damen Abbott",
+  "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
+  "_class": "com.hackmidwest.milliteambackend.model.Transaction"
+},{
+  "amount": "250",
+  "fromAccountId": "",
+  "toAccountId": "62dcb3e0244aaff5d2ff0771",
+  "description": "Transfer",
+  "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
+  "executingCustomerId": "62dc9271aa32c0c1926cfc34",
+  "name": "Ferrell Atkins",
+  "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
+  "_class": "com.hackmidwest.milliteambackend.model.Transaction"
+},{
+  "amount": "9.13",
+  "fromAccountId": "",
+  "toAccountId": "62dcb3e0244aaff5d2ff0771",
+  "description": "Transfer",
+  "transactionDateTime": "2022-07-24T04:28:07.893+00:00",
+  "executingCustomerId": "62dc9271ce855b907f8d4f97",
+  "name": "Damen Abbott",
   "profilePicture": "6beb987b-5164-4112-ade0-3fbc49abf78e",
   "_class": "com.hackmidwest.milliteambackend.model.Transaction"
 }]
