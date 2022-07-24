@@ -1,6 +1,7 @@
 import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonDatetime, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import axios from "axios"
 import { useState } from "react"
+import { CirclePicker } from 'react-color'
 import { baseUrl } from "../services/http.service"
 import { useServices } from "../services/providers"
 
@@ -9,6 +10,7 @@ export const CreateGoal = () => {
   const [values, setValues] = useState({} as {
     title?: string, 
     description?: string, 
+    color?: string,
     goal?: number, 
     endDate?: string | number 
   })
@@ -35,13 +37,18 @@ export const CreateGoal = () => {
   return (<IonPage>
     <IonHeader>
       <IonToolbar>
+        <IonTitle>Create Pocket</IonTitle>
         <IonButtons slot="start">
           <IonBackButton />
         </IonButtons>
-        <IonTitle>Create Goal</IonTitle>
       </IonToolbar>
     </IonHeader>
     <IonContent fullscreen>
+      <IonHeader collapse="condense">
+        <IonToolbar>
+          <IonTitle size="large">Create Pocket</IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonCard>
         <IonCardContent>
           <IonList>
@@ -62,7 +69,13 @@ export const CreateGoal = () => {
               <IonLabel position="stacked">End Date</IonLabel>
               <IonDatetime presentation="date" {...ionValueProps('endDate') as any} />
             </IonItem>
-            <IonButton style={{marginLeft: 16, marginRight: 16}} onClick={submit} expand="block">Create Goal</IonButton>
+            <IonItem className='ion-align-items-center' style={{marginBottom: 10}}>
+              <IonLabel position="stacked">Color</IonLabel>
+              <div style={{marginBottom: 10}}>
+              <CirclePicker onChange={(color) => setValues(vs => ({...vs, color: color.hex}))}/>
+              </div>
+            </IonItem>
+            <IonButton style={{ marginLeft: 16, marginRight: 16}} onClick={submit} expand="block">Create Goal</IonButton>
             {error && <IonItem slot="error" style={{color: 'red'}}>
               {error?.message || error}
             </IonItem>}

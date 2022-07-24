@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
                     </IonGrid>
                   </IonCardContent>
                 </IonCard>
-                <IonButton expand="block" href="/create-goal">Create Goal</IonButton>
+                <IonButton expand="block" routerLink="/create-goal">Create Pocket</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>

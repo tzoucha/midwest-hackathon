@@ -43,6 +43,10 @@ public class CustomerService {
     excuteFriendRemoval(friendCustomerId, customerId);
   }
 
+  public void dropAllCustomers(){
+    customerRepository.deleteAll();
+  }
+
   private void excuteFriendRemoval(String friendOne, String friendTwo){
     Customer customer = customerRepository.findById(friendOne).get();
     customer.getFriendCustomerIds().remove(friendTwo);
