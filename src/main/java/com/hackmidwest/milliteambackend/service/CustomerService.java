@@ -27,8 +27,10 @@ public class CustomerService {
     return customerRepository.findAll();
   }
 
-  public Customer createOrUpdateCustomer(Customer customer){
-    customer.setProfilePicture("bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey");
+  public Customer createOrUpdateCustomer(Customer customer, boolean create){
+    if (create) {
+      customer.setProfilePicture("bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey");
+    }
     return customerRepository.save(customer);
   }
 
