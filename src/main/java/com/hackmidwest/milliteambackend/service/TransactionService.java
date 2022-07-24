@@ -10,13 +10,20 @@
 package com.hackmidwest.milliteambackend.service;
 
 import com.hackmidwest.milliteambackend.model.Account;
+import com.hackmidwest.milliteambackend.model.Contributor;
 import com.hackmidwest.milliteambackend.model.Customer;
+import com.hackmidwest.milliteambackend.model.LeaderBoard;
 import com.hackmidwest.milliteambackend.model.Transaction;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
 import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import com.hackmidwest.milliteambackend.repo.TransactionRepository;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -62,6 +69,46 @@ public class TransactionService {
     }
 
     return transactionRepository.save(transaction);
+  }
+
+  public LeaderBoard generateAccountLeaderboard(String accountId){
+    List<Transaction> transactions = new ArrayList<>();
+    transactions.addAll(transactionRepository.findByFromAccountId(accountId));
+    transactions.addAll(transactionRepository.findByToAccountId(accountId));
+
+    Account account = accountRepository.findById(accountId).get();
+
+    Map<String, BigDecimal> customerIdToContribution = new HashMap<>();
+
+    LeaderBoard ret = new LeaderBoard();
+    ret.setBalance(account.getBalance());
+    transactions.forEach(transaction -> {
+      if(!customerIdToContribution.containsKey(transaction.getExecutingCustomerId())){
+        customerIdToContribution.put(transaction.executingCustomerId, BigDecimal.ZERO);
+      }
+      customerIdToContribution.put(transaction.executingCustomerId, customerIdToContribution.get(transaction.getExecutingCustomerId()).add(transaction.getAmount()));
+    });
+
+    Set<String> participants = new HashSet<>();
+    participants.add(account.getPrimaryOwnerCustomerId());
+    participants.addAll(account.getCustomerIds());
+
+    List<Contributor> contributors = new ArrayList<>();
+    participants.forEach(participantId -> {
+      Customer customer = customerRepository.findById(participantId).get();
+
+      Contributor contributor = new Contributor();
+      contributor.setName(customer.getFirstName() + " " + customer.getLastName());
+      contributor.setProfilePicture(customer.getProfilePicture());
+      contributor.setContribution(BigDecimal.ZERO);
+
+      if(customerIdToContribution.containsKey(participantId)){
+        contributor.setContribution(customerIdToContribution.get(participantId));
+      }
+      contributors.add(contributor);
+    });
+    ret.setContributors(contributors);
+    return ret;
   }
 
   public void dropAllTransactions(){
