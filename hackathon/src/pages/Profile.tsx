@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal } from '@ionic/react';
 import { IonNote } from '@ionic/react';
 
@@ -6,6 +6,7 @@ import { trash, checkbox } from 'ionicons/icons';
 import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
+import axios from 'axios';
 
 const Profile: React.FC = () => {
   const services = useServices();
@@ -51,6 +52,30 @@ const Profile: React.FC = () => {
           <IonCardHeader>
             <IonCardSubtitle><IonImg src={`${baseUrl}/profile-pic/${services.authService.user?.profilePicture}`} /></IonCardSubtitle>
             <IonCardTitle>{name}</IonCardTitle>
+            {!readOnly && <input type="file" onChange={async (e) => {
+              const file = e.target.files?.[0]
+              if(file) {
+                var data = new FormData();
+                data.append('image', file);
+                data.append('id', services.authService.user?.id || '');
+                data.append('customer', 'true');
+                var config = {
+                  method: 'post',
+                  url: `${baseUrl}/profile-pic`,
+                  headers: { 
+                    'content-type': 'multipart/form-data'
+                  },
+                  data : data
+                };
+          
+                try {
+                  const result = (await axios(config)).data
+                  console.log(result)
+                } catch(e) {
+                  console.error(e);
+                }
+              }
+            } } />}
           </IonCardHeader>
 
           <IonCardContent>
