@@ -211,7 +211,19 @@ const Goal: React.FC = () => {
                <IonAvatar style={{ marginRight: "10px" }}>
                  <img src={`${baseUrl}/profile-pic/${k.profilePicture}`} />
                </IonAvatar>
-               <IonLabel><h2>{k.name}</h2><IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar></IonLabel>
+               <IonLabel><h2>{k.name}</h2>
+               <IonGrid>
+                <IonRow style={{alignItems:'center'}}>
+                  <IonCol>
+                    <IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar>
+                  </IonCol>
+                  <IonCol size="auto">
+                    {k.contribution.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+                  </IonCol>
+                </IonRow>
+               </IonGrid>
+                {/* <IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar> asdf */}
+              </IonLabel>
                
                {/* <IonLabel>{result.firstName}</IonLabel> */}
              </IonItem>
