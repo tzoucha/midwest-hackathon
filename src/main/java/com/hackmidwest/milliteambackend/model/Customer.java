@@ -10,12 +10,11 @@
 package com.hackmidwest.milliteambackend.model;
 
 import java.util.List;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 public class Customer {
-
-  @Id
-  public String id;
+  @MongoId
+  public String _id;
   public String firstName;
   public String lastName;
   public String password;
@@ -29,11 +28,11 @@ public class Customer {
   public List<String> friendCustomerIds;
 
   public String getId() {
-    return id;
+    return _id;
   }
 
   public Customer setId(String id) {
-    this.id = id;
+    this._id = id;
     return this;
   }
 
