@@ -1,5 +1,6 @@
 import {
   IonApp,
+  IonBadge,
   IonIcon,
   IonLabel,
   IonLoading,
@@ -10,7 +11,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { homeOutline, personCircleOutline } from 'ionicons/icons';
+import { homeOutline, invertModeOutline, personCircleOutline } from 'ionicons/icons';
 import { Redirect, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
@@ -39,6 +40,8 @@ import LoginPage from './pages/Login';
 import { AUTH_CHANGE_EVENT } from './services/auth.service';
 import { useServices } from './services/providers';
 import './theme/variables.css';
+import axios from 'axios';
+import { baseUrl } from './services/http.service';
 
 setupIonicReact({
   scrollAssist: false
@@ -48,6 +51,7 @@ const AuthChooser = () => {
   const services = useServices();
   const [isInitialized, setIsInitialized] = useState(false) 
   const [isAuthorized, setIsAuthorized] = useState(false)
+  const [invitations, setInvitations] = useState({ loading: true } as { loading?: boolean, data: any[] })
   useEffect(() => {
     setIsInitialized(false);
     (async () => {
@@ -56,6 +60,22 @@ const AuthChooser = () => {
       setIsInitialized(true);
     })()
   }, [services.authService]);
+
+  useEffect(() => {
+    (async () => {
+      const pocketInvitations = (await axios.get(`${baseUrl}/invitations/${services.authService.user?.id}`)).data
+      const response = (await Promise.all(pocketInvitations.map(async (invite: any) => {
+        try {
+          let call = await axios.get(`${baseUrl}/${invite.type === "FRIEND" ? "customers" : "accounts/details"}/${invite.fromId}`)
+          return { ...call.data, sentDate: invite.sentDateTime, inviteId: invite.id, type: invite.type }
+        } catch (e) {
+          return null
+        }
+      }))).filter(k => k)
+      console.log("HERE", response)
+      setInvitations({ data: response })
+    })()
+  }, [])
   useEffect(() => {
     const listener = () => {
       setIsAuthorized(services.authService.isAuthorized())
@@ -69,7 +89,7 @@ const AuthChooser = () => {
     !isInitialized
     ? <IonLoading isOpen={true} />
     : isAuthorized
-    ? <AuthedRoutes />
+    ? <AuthedRoutes invitations={invitations} />
     : <UnauthedRoutes />)
 }
 
@@ -82,7 +102,11 @@ const App: React.FC = () => (
 );
 
 export default App;
-const AuthedRoutes = () => 
+const getBadge = (type:any, invitations:any) => {
+  let length = invitations.data?.filter((k: any) => k.type === type).length
+  return length > 0 ? <IonBadge>{length}</IonBadge> : <></>
+}
+const AuthedRoutes = ({invitations}: {invitations:any}) => 
   <IonTabs>
     <IonRouterOutlet>
       <Route exact path="/dashboard">
@@ -102,10 +126,13 @@ const AuthedRoutes = () =>
     <IonTabBar slot="bottom">
       <IonTabButton tab="dashboard" href="/dashboard">
         <IonIcon icon={homeOutline} />
+
+        {getBadge("ACCOUNT", invitations)}
         <IonLabel>Dashboard</IonLabel>
       </IonTabButton>
       <IonTabButton tab="profile" href="/profile">
         <IonIcon icon={personCircleOutline} />
+        {getBadge("FRIEND", invitations)}
         <IonLabel>Profile</IonLabel>
       </IonTabButton>
     </IonTabBar>

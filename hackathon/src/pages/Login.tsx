@@ -21,7 +21,7 @@ export const LoginPage = () => {
   return (<IonPage>
     <IonContent fullscreen style={{height: '100%'}}>
       <IonGrid style={{height: '100%'}}>
-        <IonRow className='ion-align-items-center'>
+        <IonRow className='ion-align-items-center' style={{height:'100%'}}>
           <IonCol size='12'>
             <IonCard>
               <IonCardHeader style={{backgroundColor: '#42b95c'}}>

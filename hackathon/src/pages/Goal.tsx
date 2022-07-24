@@ -17,8 +17,17 @@ const Goal: React.FC = () => {
   const [readOnly, setReadOnly] = useState(true)
   const [friendSearch, setFriendSearch] = useState<string>("");
   const [friendsSearchResults, setFriendsSearchResults] = useState({ loading: true } as { loading?: boolean, data: any[] })
-  const [leaderboard, setLeaderBoard] = useState({ loading: true } as { loading?: boolean, data: any[] })
+  const [leaderboard, setLeaderBoard] = useState({ loading: true } as { loading?: boolean, data: any })
   const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
+  useEffect(() => {
+    if (goalUID) {
+      (async () => {
+        const leaderboard = (await axios.get(`${baseUrl}/transactions/leaderboard/${goalUID}`)).data
+        setLeaderBoard({data:leaderboard})
+        console.log("leaderborad", leaderboard)
+      })()
+    }
+  }, [goalUID])
   useEffect(() => {
     if (goalUID) {
       (async () => {
@@ -194,7 +203,34 @@ const Goal: React.FC = () => {
               </IonItem>
             )}
           </IonList>}
-          {tranView === 'leaderboard' && <h1>LEADERBOARD HERE</h1>}
+          {tranView === 'leaderboard' && 
+          <>
+          {/* <IonList> */}
+            {leaderboard.data?.contributors.sort((a:any, b:any) => b.contribution - a.contribution).map((k:any, index:number) => 
+               <IonItem key={index}>
+               <IonAvatar style={{ marginRight: "10px" }}>
+                 <img src={`${baseUrl}/profile-pic/${k.profilePicture}`} />
+               </IonAvatar>
+               <IonLabel><h2>{k.name}</h2>
+               <IonGrid>
+                <IonRow style={{alignItems:'center'}}>
+                  <IonCol>
+                    <IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar>
+                  </IonCol>
+                  <IonCol size="auto">
+                    {k.contribution.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+                  </IonCol>
+                </IonRow>
+               </IonGrid>
+                {/* <IonProgressBar value={(k.contribution / leaderboard.data.balance)}></IonProgressBar> asdf */}
+              </IonLabel>
+               
+               {/* <IonLabel>{result.firstName}</IonLabel> */}
+             </IonItem>
+            )}
+          {/* </IonList> */}
+          </>
+          }
         </IonGrid>
         <IonModal ref={addAFriendModalRef}>
           <IonHeader>
