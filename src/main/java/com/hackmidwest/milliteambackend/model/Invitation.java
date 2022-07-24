@@ -18,6 +18,8 @@ public class Invitation {
   public String type;
   public LocalDateTime sentDateTime;
 
+
+
   public String getId() {
     return id;
   }
