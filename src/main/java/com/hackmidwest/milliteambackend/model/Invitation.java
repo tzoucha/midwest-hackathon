@@ -18,16 +18,6 @@ public class Invitation {
   public String type;
   public LocalDateTime sentDateTime;
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String name;
-
 
 
   public String getId() {
