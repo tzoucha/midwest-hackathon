@@ -83,4 +83,8 @@ public class InvitationService {
     customer.getFriendCustomerIds().add(friendCustomerId);
     customerRepository.save(customer);
   }
+
+  public void dropAllInvitations(){
+    invitationRepository.deleteAll();
+  }
 }

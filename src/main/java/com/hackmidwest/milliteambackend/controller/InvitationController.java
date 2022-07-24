@@ -9,6 +9,7 @@
  */
 package com.hackmidwest.milliteambackend.controller;
 
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.model.Invitation;
 import com.hackmidwest.milliteambackend.service.InvitationService;
 import java.util.List;
@@ -58,5 +59,11 @@ public class InvitationController {
   public ResponseEntity<Invitation> acceptInvitation(@PathVariable String id){
     invitationService.acceptInvitation(id);
     return ResponseEntity.status(HttpStatus.OK).body(null);
+  }
+
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<Customer> dropAllInvitations(){
+    invitationService.dropAllInvitations();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }
