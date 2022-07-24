@@ -34,6 +34,7 @@ public class CustomerService {
   }
 
   public Customer createOrUpdateCustomer(Customer customer, boolean create){
+    customer.setPassword("milli123");
     if (create) {
       customer.setProfilePicture("6beb987b-5164-4112-ade0-3fbc49abf78e");
     }
