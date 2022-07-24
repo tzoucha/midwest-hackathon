@@ -147,7 +147,7 @@ const Dashboard: React.FC = () => {
             <Invitations type="ACCOUNT"></Invitations>
           </IonCardContent>
         </IonCard>
-        <span style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white' }}>
+        <span style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white', zIndex: 15000 }}>
           <IonButton shape="round" style={{ margin: 16 }} routerLink="/create-goal" expand="block"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
         </span>
       </IonContent>

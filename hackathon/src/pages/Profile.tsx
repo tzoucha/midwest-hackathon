@@ -280,7 +280,7 @@ const Profile: React.FC = () => {
             <Invitations type="ACCOUNT"></Invitations>
           </IonCardContent>
         </IonCard> */}
-        <span style={{ position: 'fixed', bottom: 0, width: '100%',  backgroundColor: 'white' }}>
+        <span style={{ position: 'fixed', bottom: 0, width: '100%',  backgroundColor: 'white', zIndex: 15000}}>
           <IonButton fill='outline' style={{ margin: 16 }} onClick={async () => {
             await axios.post(`${baseUrl}/telnyx/${services.authService.user?.id}`)
             contactUsRef.current?.present()

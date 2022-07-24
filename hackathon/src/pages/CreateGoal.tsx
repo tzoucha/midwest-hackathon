@@ -132,7 +132,7 @@ export const CreateGoal = () => {
           </IonList>
         </IonCardContent>
       </IonCard>
-      <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
+      <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white', zIndex: 15000}}>
         <IonButton shape="round" style={{ margin: 16 }} onClick={submit} expand="block">Create Goal</IonButton>
       </span>
     </IonContent>
