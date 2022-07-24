@@ -8,16 +8,23 @@ const Dashboard: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>
-              <img src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
+          <img style={{filter: 'invert(61%) sepia(74%) saturate(410%) hue-rotate(82deg) brightness(89%) contrast(81%)'}} src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
           </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle>
+              <img style={{filter: 'invert(61%) sepia(74%) saturate(410%) hue-rotate(82deg) brightness(89%) contrast(81%)'}} src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
+            </IonTitle>
+          </IonToolbar>
+        </IonHeader>
         <IonGrid>
           <IonRow className="ion-align-items-center">
             <IonCol>
               <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, Damen!</h1>
-              <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by creating a POCKET.</p>
+              <p className='darkGray'>We are so glad you are using Pocket Change to help save for fun in your life! Get started by <a href="/create-goal">creating a pocket</a>.</p>
             </IonCol>
           </IonRow>
           <IonAccordionGroup>
@@ -51,7 +58,7 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol size='12'>
-                          <IonProgressBar value={0.15}></IonProgressBar>
+                          <IonProgressBar value={0.15} style={{'--background': '#f4f5f8'}}></IonProgressBar>
                         </IonCol>
                         <IonCol style={{textAlign: 'right'}}>$10,459 raised out of $69,420 goal</IonCol>
                       </IonRow>
@@ -72,7 +79,7 @@ const Dashboard: React.FC = () => {
             </IonCol>
             <IonCol>
               {/* Loop through cards for accounts */}
-                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderLeftWidth:'6px'}}>
+                <IonCard style={{marginTop: 10,  border:'2px pink solid', borderRightWidth:'6px',borderBottomWidth:'4px'}}>
                   <IonCardHeader style={{backgroundColor: '#f4f5f8'}}><strong style={{fontSize: 18}}>Pocket Name</strong></IonCardHeader>
                   <IonCardContent style={{paddingBottom:5}}>
                     <IonGrid>
@@ -86,19 +93,19 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol size='12'>
-                          <IonProgressBar value={0.15}></IonProgressBar>
+                          <IonProgressBar value={0.15} style={{'--progress-background': 'pink', '--background': '#f4f5f8'}}></IonProgressBar>
                         </IonCol>
                         <IonCol style={{textAlign: 'right'}}>$0 raised out of $0,000 goal</IonCol>
                       </IonRow>
                       <IonRow>
                         <IonCol style={{textAlign:'right'}}>
-                          <IonButton color='secondary' shape="round" expand="block" size='small'>View Pocket</IonButton>
+                          <IonButton style={{'--background':'pink', '--background-activated':'#ccc'}} shape="round" expand="block" size='small'>View Pocket</IonButton>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
                   </IonCardContent>
                 </IonCard>
-                <IonButton expand="block" href="/create-goal">Create Goal</IonButton>
+                <IonButton expand="block" shape="round" href="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
             </IonCol>
           </IonRow>
         </IonGrid>
