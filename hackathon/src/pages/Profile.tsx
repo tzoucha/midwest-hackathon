@@ -96,14 +96,12 @@ const Profile: React.FC = () => {
                 <IonIcon slot="icon-only" icon={trash} />
                 
                 </IonItemOption>
-                { isAccount() && 
                 <IonItemOption onClick={async () => {
                   await axios.post(`${baseUrl}/invitations/${invite.inviteId}`)
                   setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
                 }}>
                   <IonIcon slot="icon-only" icon={checkbox} />
                 </IonItemOption>
-                 }
               </IonItemOptions>
             </IonItemSliding>
           )
