@@ -9,6 +9,7 @@
  */
 package com.hackmidwest.milliteambackend.model;
 
+import java.util.List;
 import org.springframework.data.annotation.Id;
 
 public class Customer {
@@ -17,7 +18,7 @@ public class Customer {
   public String id;
   public String firstName;
   public String lastName;
-  public String hashedPassword;
+  public String password;
   public String profilePicture;
   public String emailAddress;
   public String addressLine1;
@@ -25,6 +26,7 @@ public class Customer {
   public String state;
   public String zipCode;
   public String phoneNumber;
+  public List<String> friendCustomerIds;
 
   public String getId() {
     return id;
@@ -53,12 +55,12 @@ public class Customer {
     return this;
   }
 
-  public String getHashedPassword() {
-    return hashedPassword;
+  public String getPassword() {
+    return password;
   }
 
-  public Customer setHashedPassword(String hashedPassword) {
-    this.hashedPassword = hashedPassword;
+  public Customer setPassword(String password) {
+    this.password = password;
     return this;
   }
 
@@ -122,6 +124,15 @@ public class Customer {
 
   public Customer setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
+    return this;
+  }
+
+  public List<String> getFriendCustomerIds() {
+    return friendCustomerIds;
+  }
+
+  public Customer setFriendCustomerIds(List<String> friendCustomerIds) {
+    this.friendCustomerIds = friendCustomerIds;
     return this;
   }
 }

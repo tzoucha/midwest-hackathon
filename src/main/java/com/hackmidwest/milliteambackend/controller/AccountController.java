@@ -11,11 +11,12 @@ package com.hackmidwest.milliteambackend.controller;
 
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.service.AccountService;
-import java.util.List;
+import java.util.Set;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,12 +32,17 @@ public class AccountController {
   }
 
   @GetMapping("/{customerId}")
-  public ResponseEntity<List<Account>> findAccountsForCustomer(String customerId){
+  public ResponseEntity<Set<Account>> findAccountsForCustomer(String customerId){
     return ResponseEntity.ok(accountService.findAccountsForCustomer(customerId));
   }
 
   @PostMapping()
   public ResponseEntity<Account> createAccount(@RequestBody Account account){
-    return ResponseEntity.ok(accountService.createAccount(account));
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Account> updateAccount(@RequestBody Account account){
+    return ResponseEntity.ok(accountService.createOrUpdateAccount(account));
   }
 }

@@ -12,10 +12,12 @@ package com.hackmidwest.milliteambackend.controller;
 import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.service.CustomerService;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +39,18 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-    return ResponseEntity.ok(customerService.createCustomer(customer));
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<Customer> login(@RequestBody Customer customer){
+    Customer returnedCustomer = customerService.login(customer);
+    return returnedCustomer == null? ResponseEntity.status(HttpStatus.NOT_FOUND).body(null) : ResponseEntity.ok(returnedCustomer);
   }
 
 }

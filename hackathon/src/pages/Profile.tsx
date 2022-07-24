@@ -1,5 +1,5 @@
-import React, { createRef, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList } from '@ionic/react';
+import React, { createRef, useRef, useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal } from '@ionic/react';
 import { IonNote } from '@ionic/react';
 
 import { trash, checkbox } from 'ionicons/icons';
@@ -28,6 +28,9 @@ const Profile: React.FC = () => {
   const [address, setAddress] = useState<string>("19622 Gail Ave Omaha, NE 68135");
   const [phone, setPhone] = useState<string>("5317774149");
   const [readOnly, setReadOnly] = useState<boolean>(true)
+
+  const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
+
   return (
     <IonPage>
       <IonHeader>
@@ -71,6 +74,34 @@ const Profile: React.FC = () => {
               </>
             }
             {/* ÷<IonButton onClick={() => setReadOnly(!readOnly)}expand="block">Edit Profile</IonButton> */}
+          </IonCardContent>
+        </IonCard>
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>Add a Friend</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block">Add a Friend</IonButton>
+            <IonModal ref={addAFriendModalRef} initialBreakpoint={0.25}>
+              <IonHeader>
+                <IonToolbar>
+                  <IonButtons slot="start">
+                    <IonButton onClick={() => addAFriendModalRef.current?.dismiss()}>Cancel</IonButton>
+                  </IonButtons>
+                  <IonTitle>Welcome</IonTitle>
+                  <IonButtons slot="end">
+                    <IonButton strong={true} onClick={() => {console.log("CONFIRM ADD FRIEND")}}>
+                      Confirm
+                    </IonButton>
+                  </IonButtons>
+                </IonToolbar>
+              </IonHeader>
+              <IonContent className="ion-padding">
+                <IonItem>
+                  SOMEThING
+                </IonItem>
+              </IonContent>
+            </IonModal>
           </IonCardContent>
         </IonCard>
         {/* <h2>Pending Invites</h2> */}
