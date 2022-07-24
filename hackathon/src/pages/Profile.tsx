@@ -1,8 +1,8 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal, useIonLoading, IonAvatar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal, useIonLoading, IonAvatar, IonFabButton } from '@ionic/react';
 import { IonNote } from '@ionic/react';
 
-import { trash, checkbox, pencilOutline, createOutline, chatbubblesOutline, logOut, logOutOutline, personAddOutline } from 'ionicons/icons';
+import { trash, checkbox, pencilOutline, createOutline, chatbubblesOutline, logOut, logOutOutline, personAddOutline, create } from 'ionicons/icons';
 import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
@@ -77,7 +77,7 @@ const Profile: React.FC = () => {
             <IonCardSubtitle>
               <IonAvatar style={{ width: 'auto', height: 'auto' }}>
                 <img src={`${baseUrl}/profile-pic/${pic}`} />
-                <IonButton color='light' style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => filePicker.current?.click()}><IonIcon icon={createOutline} size='large' /></IonButton>
+                <IonFabButton color='secondary' style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => filePicker.current?.click()}><IonIcon icon={pencilOutline} /></IonFabButton>
               </IonAvatar>
             </IonCardSubtitle>
             <input type="file" style={{ display: 'none' }} ref={filePicker} onChange={async (e) => {
