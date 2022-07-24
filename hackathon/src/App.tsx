@@ -39,7 +39,9 @@ import LoginPage from './pages/Login';
 import { AUTH_CHANGE_EVENT } from './services/auth.service';
 import Goal from './pages/Goal';
 
-setupIonicReact();
+setupIonicReact({
+  scrollAssist: false
+});
 
 const AuthChooser = () => {
   const services = useServices();

@@ -12,6 +12,7 @@ package com.hackmidwest.milliteambackend.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.data.annotation.Id;
 
 public class Account {
@@ -26,6 +27,8 @@ public class Account {
   public BigDecimal goal;
   public LocalDate startDate;
   public LocalDate endDate;
+  public String title;
+  public String color;
 
   public String getId() {
     return id;
@@ -115,5 +118,53 @@ public class Account {
   public Account setEndDate(LocalDate endDate) {
     this.endDate = endDate;
     return this;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public Account setTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public Account setColor(String color) {
+    this.color = color;
+    return this;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Account account = (Account) o;
+    return Objects.equals(id, account.id) &&
+        Objects.equals(customerIds, account.customerIds) &&
+        Objects.equals(balance, account.balance) &&
+        Objects.equals(type, account.type) &&
+        Objects.equals(primaryOwnerCustomerId, account.primaryOwnerCustomerId) &&
+        Objects.equals(description, account.description) &&
+        Objects.equals(picture, account.picture) &&
+        Objects.equals(goal, account.goal) &&
+        Objects.equals(startDate, account.startDate) &&
+        Objects.equals(endDate, account.endDate) &&
+        Objects.equals(title, account.title) &&
+        Objects.equals(color, account.color);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects
+        .hash(id, customerIds, balance, type, primaryOwnerCustomerId, description, picture, goal,
+            startDate, endDate, title, color);
   }
 }

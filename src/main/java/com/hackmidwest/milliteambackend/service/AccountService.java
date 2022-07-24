@@ -11,7 +11,11 @@ package com.hackmidwest.milliteambackend.service;
 
 import com.hackmidwest.milliteambackend.model.Account;
 import com.hackmidwest.milliteambackend.repo.AccountRepository;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,11 +27,18 @@ public class AccountService {
     this.accountRepository = accountRepository;
   }
 
-  public List<Account> findAccountsForCustomer(String customerId){
-    return accountRepository.findByCustomerIds(customerId);
+  public Set<Account> findAccountsForCustomer(String customerId){
+    Set<Account> ret = new HashSet<>();
+    ret.addAll(accountRepository.findByCustomerIds(customerId));
+    ret.addAll(accountRepository.findByPrimaryOwnerCustomerId(customerId));
+    return ret;
   }
 
-  public Account createAccount(Account account){
+  public void closeAccount(String accountId){
+    accountRepository.deleteById(accountId);
+  }
+
+  public Account createOrUpdateAccount(Account account){
     return accountRepository.save(account);
   }
 }
