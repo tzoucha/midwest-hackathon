@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
             </IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonGrid>
+        <IonGrid style={{marginBottom: 100}}>
           <IonRow className="ion-align-items-center">
             <IonCol>
               <h1 className='darkGray' style={{textAlign: 'center'}}>Welcome, {services.authService.user?.firstName}!</h1>
@@ -136,8 +136,11 @@ const Dashboard: React.FC = () => {
               </IonCol>
             </IonRow>
           )}
-          <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
+          {/* <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton> */}
         </IonGrid>
+        <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
+          <IonButton style={{ margin: 16 }} routerLink="/create-goal" expand="block"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
+        </span>
       </IonContent>
     </IonPage>
   );
