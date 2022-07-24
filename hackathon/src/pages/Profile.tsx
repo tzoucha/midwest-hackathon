@@ -42,11 +42,16 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      const pocketInvitations = (await axios.get(`${baseUrl}/invitations/${services.authService.user?.id}/ACCOUNT`)).data
-      const response = await Promise.all(pocketInvitations.map(async (invite: any) => {
-        let call = await axios.get(`${baseUrl}/accounts/details/${invite.fromId}`)
-        return { ...call.data, sentDate: invite.sentDateTime, inviteId: invite.id }
-      }))
+      const pocketInvitations = (await axios.get(`${baseUrl}/invitations/${services.authService.user?.id}`)).data
+      const response = (await Promise.all(pocketInvitations.map(async (invite: any) => {
+        try {
+          let call = await axios.get(`${baseUrl}/${invite.type === "FRIEND" ? "customers" : "accounts/details"}/${invite.fromId}`)
+          return { ...call.data, sentDate: invite.sentDateTime, inviteId: invite.id, type: invite.type }
+        } catch (e) {
+          return null
+        }
+      }))).filter(k => k)
+      console.log("HERE", response)
       setInvitations({ data: response })
     })()
   }, [])
@@ -59,6 +64,55 @@ const Profile: React.FC = () => {
     const formattedDate = `${tempDate[1]} ${+tempDate[2]}`;
     return formattedDate;
   };
+
+  const invitationsView = (type: "ACCOUNT" | "FRIEND") => {
+    const isAccount = () => type === "ACCOUNT"
+    return (invitations.data &&
+      <IonList>
+
+        {invitations.data.filter(k => k.type === type).map((invite, index) => {
+          const slidingItem = createRef<HTMLIonItemSlidingElement>()
+          return (
+            <IonItemSliding ref={slidingItem} key={index}>
+              <IonItem onClick={() => slidingItem.current?.open("end")}>
+                
+                  {!isAccount() &&
+                  <IonAvatar style={{marginRight: "5px"}}>
+                    <img src={`${baseUrl}/profile-pic/${pic}`} />
+                  </IonAvatar>}
+                <IonLabel>
+                  {isAccount() ? invite.title : `${invite.firstName} ${invite.lastName}`}
+                  {isAccount() && <p>{invite.description}</p>}
+                </IonLabel>
+                <IonNote slot="end">
+                  {convertISOStringToMonthDay(invite.sentDate)}
+                </IonNote>
+              </IonItem>
+              <IonItemOptions side="end">
+                <IonItemOption color="danger" onClick={async () => {
+                  await axios.delete(`${baseUrl}/invitations/${invite.inviteId}`)
+                  setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
+                }}>
+                <IonIcon slot="icon-only" icon={trash} />
+                
+                </IonItemOption>
+                { isAccount() && 
+                <IonItemOption onClick={async () => {
+                  await axios.post(`${baseUrl}/invitations/${invite.inviteId}`)
+                  setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
+                }}>
+                  <IonIcon slot="icon-only" icon={checkbox} />
+                </IonItemOption>
+                 }
+              </IonItemOptions>
+            </IonItemSliding>
+          )
+        }
+        )}
+
+      </IonList>
+    )
+  }
 
   return (
     <IonPage>
@@ -184,7 +238,9 @@ const Profile: React.FC = () => {
             <IonCardTitle>Add a Friend</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
+            {invitationsView("FRIEND")}
             <IonButton onClick={() => addAFriendModalRef.current?.present()} expand="block"><IonIcon slot="start" icon={personAddOutline} /> Add a Friend</IonButton>
+
             <IonModal ref={addAFriendModalRef}>
               <IonHeader>
                 <IonToolbar>
@@ -202,79 +258,74 @@ const Profile: React.FC = () => {
               <IonContent className="ion-padding">
                 <IonItem style={{ marginBottom: "10px" }}>
                   <IonLabel position="floating">Search</IonLabel>
-                  <IonInput value={friendSearch} onIonChange={e => setFriendSearch(e.detail.value!)}></IonInput>
+                  <IonInput debounce={250} value={friendSearch} onIonChange={async (e) => {
+                    await present()
+                    setFriendSearch(e.detail.value!)
+                    let response = (await axios.get(`${baseUrl}/customers/fullTextSearch?searchPhrase=${e.detail.value!}`)).data
+                    setFriendsSearchResults({ data: response });
+                    dismiss()
+                  }}></IonInput>
                 </IonItem>
                 {/* {friendsSearchResults?.data?.length == 0 ? 'No results' : <div>Fuck you</div>} */}
+                {friendsSearchResults?.data &&
+                  <div style={{ margin: "10px" }}>
+                    <h3>Results</h3>
+                    <IonList >
+                      {friendsSearchResults?.data?.map((result, index) =>
+                        <>
+                          <IonItem key={index}>
+                            <IonAvatar style={{ marginRight: "10px" }}>
+                              <img src={`${baseUrl}/profile-pic/${result.profilePicture}`} />
+                              {/* <img src={result.profilePicture} /> */}
+                            </IonAvatar>
+                            <IonLabel><h2>{result.firstName} {result.lastName}</h2></IonLabel>
+                            <IonButton onClick={async () => {
+                              present()
+                              await axios.post(`${baseUrl}/invitations/friend?toCustomer=${result.id}&fromCustomer=${services.authService.user?.id}`)
+                              dismiss()
+                            }}>Add</IonButton>
+                            {/* <IonLabel>{result.firstName}</IonLabel> */}
+                          </IonItem>
+                        </>
+                      )}
+
+                    </IonList>
+                  </div>
+                }
               </IonContent>
             </IonModal>
           </IonCardContent>
         </IonCard>
         {/* <h2>Pending Invites</h2> */}
-        <IonCard  style={{marginBottom: 150}}>
+        <IonCard style={{ marginBottom: 150 }}>
           <IonCardHeader>
             {/* <IonCardSubtitle><IonImg src={process.env.PUBLIC_URL + '/profile_pic.jpeg'} /></IonCardSubtitle> */}
             <IonCardTitle>Pending Invites</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {invitations.data &&
-              <IonList>
-
-                {invitations.data.map((invite, index) => {
-                  const slidingItem = createRef<HTMLIonItemSlidingElement>()
-                  return (
-                    <IonItemSliding ref={slidingItem} key={index}>
-                      <IonItem onClick={() => slidingItem.current?.open("end")}>
-                        <IonLabel>
-                          <h2>{invite.title}</h2>
-                          <p>{invite.description}</p>
-                        </IonLabel>
-                        <IonNote slot="end">
-                          {convertISOStringToMonthDay(invite.sentDate)}
-                        </IonNote>
-                      </IonItem>
-                      <IonItemOptions side="end">
-                        <IonItemOption color="danger" onClick={async () => {
-                          await axios.delete(`${baseUrl}/invitations/${invite.inviteId}`)
-                          setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
-                        }}>
-                          <IonIcon slot="icon-only" icon={trash} />
-                        </IonItemOption>
-                        <IonItemOption onClick={async () => {
-                          await axios.post(`${baseUrl}/invitations/${invite.inviteId}`)
-                          setInvitations((invitations) => ({ data: invitations.data.filter(i => i.inviteId != invite.inviteId) }))
-                        }}>
-                          <IonIcon slot="icon-only" icon={checkbox} />
-                        </IonItemOption>
-                      </IonItemOptions>
-                    </IonItemSliding>
-                  )
-                }
-                )}
-
-              </IonList>
-            }
+            {invitationsView("ACCOUNT")}
           </IonCardContent>
         </IonCard>
-        <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
+        <span style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white' }}>
           <IonButton fill='outline' style={{ margin: 16 }} onClick={async () => {
             await axios.post(`${baseUrl}/telnyx/${services.authService.user?.id}`)
             contactUsRef.current?.present()
-            }} expand="block"><IonIcon slot="start" icon={chatbubblesOutline} /> Contact us</IonButton>
-            <IonModal ref={contactUsRef} initial-breakpoint="0.25">
+          }} expand="block"><IonIcon slot="start" icon={chatbubblesOutline} /> Contact us</IonButton>
+          <IonModal ref={contactUsRef} initial-breakpoint="0.25">
             <IonHeader>
-                <IonToolbar>
-                  <IonTitle>Telnyx</IonTitle>
-                  <IonButtons slot="end">
-                    <IonButton strong={true} onClick={() => { contactUsRef.current?.dismiss() }}>
-                      Close
-                    </IonButton>
-                  </IonButtons>
-                </IonToolbar>
-              </IonHeader>
-              <IonCardContent>
-                <p style={{textAlign: "center"}}>A Text message has been sent to your phone!</p>
-              </IonCardContent>
-            
+              <IonToolbar>
+                <IonTitle>Telnyx</IonTitle>
+                <IonButtons slot="end">
+                  <IonButton strong={true} onClick={() => { contactUsRef.current?.dismiss() }}>
+                    Close
+                  </IonButton>
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonCardContent>
+              <p style={{ textAlign: "center" }}>A Text message has been sent to your phone!</p>
+            </IonCardContent>
+
           </IonModal>
           <IonButton style={{ margin: 16, marginBottom: 8 }} onClick={() => services.authService.logout()} expand="block"><IonIcon slot="start" icon={logOutOutline} /> Sign out</IonButton>
         </span>
