@@ -1,0 +1,23 @@
+[
+  '{{repeat(15)}}',
+
+/**
+* Paste one or more documents here
+*/
+{
+  "id" : '{{objectId()}}',
+  "customerIds": [
+    '{{objectId()}}'
+  ],
+  "balance": '{{floating(1000, 4000, 2, "$0,0.00")}}',
+  "primaryOwnerCustomerId": '{{objectId()}}',
+  "description": "Test Jar for S&Gs",
+  "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+  "goal": '{{floating(1000, 4000, 2, "$0,0.00")}}',
+  "startDate": '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss")}}',
+  "endDate": '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss")}}',
+  "color": "color",
+  "title": "Wounded Warriors",
+  "_class": "com.hackmidwest.milliteambackend.model.Account"
+}
+  ]
