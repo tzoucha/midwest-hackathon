@@ -1,38 +1,61 @@
 import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonPage, IonRow, IonSegment, IonSegmentButton, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar } from '@ionic/react';
+import axios from 'axios';
 import { person, call, settings } from 'ionicons/icons';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { baseUrl } from '../services/http.service';
+import { useServices } from '../services/providers';
 import './pageStyles.css';
 
 const Goal: React.FC = () => {
-  return (
+  let {goalUID} = useParams<any>();
+  const [pocketInfo, setPocketInfo] = useState({loading: true} as {loading?: boolean, data: any})
+  useEffect(() => {
+    (async () => {
+      const pocket = (await axios.get(`${baseUrl}/accounts/details/${goalUID}`)).data
+      setPocketInfo({data: pocket})
+    })()
+  }, [])
+  return ( pocketInfo?.data ?
     <IonPage>
-      <IonHeader>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>
+        <img style={{filter: 'invert(61%) sepia(74%) saturate(410%) hue-rotate(82deg) brightness(89%) contrast(81%)'}} src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
+        </IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent fullscreen>
+      <IonHeader collapse="condense">
         <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton />
-          </IonButtons>
-          <IonTitle>App Logo Here</IonTitle>
+          <IonTitle>
+            <img style={{filter: 'invert(61%) sepia(74%) saturate(410%) hue-rotate(82deg) brightness(89%) contrast(81%)'}} src={process.env.PUBLIC_URL + '/assets/logo-header.png'} />
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
         <IonGrid>
           <IonRow>
-            <IonCol size='12'>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus.</p>
-              <h1>Goal Name</h1>
+            <IonCol size='12' style={{textAlign: 'center'}}>
+              <img style={{width: '50%', borderRadius: '50%', border: `4px ${pocketInfo.data.color} solid`}} src="https://m.media-amazon.com/images/I/71cmEB9qAOL._AC_SL1500_.jpg"/>
+              <h1>{pocketInfo.data.title}</h1>
+              <p>{pocketInfo.data.description}</p>
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol size='6'>Collected so far: 10000</IonCol>
-            <IonCol size='6'>Goal amount: 1000000</IonCol>
-            <IonCol size='6'>Start date: date here</IonCol>
-            <IonCol size='6'>End date: date here</IonCol>
+            <IonCard>
+              
+            </IonCard>
+            <IonCol size='6'>Raised so far:<br/> <strong>{(pocketInfo.data.balance).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
+            <IonCol size='6'>Goal amount:<br/> <strong>{(pocketInfo.data.goal).toLocaleString("en-US", {style:"currency", currency:"USD"})}</strong></IonCol>
+            <IonCol size='6'>Start date:<br/> <strong>{new Date(pocketInfo.data.startDate).toLocaleDateString([], {year: "numeric",month: "2-digit",day: "2-digit"})}</strong></IonCol>
+            <IonCol size='6'>End date:<br/> <strong>{(new Date(pocketInfo.data.endDate)).toLocaleDateString([],{year: "numeric",month: "2-digit",day: "2-digit"})}</strong></IonCol>
           </IonRow>
           <IonRow>
-            <IonCol>
-              <IonButton expand="block">Block Button</IonButton>
+            <IonCol size='4'>
+              <IonButton style={{'--border-color':pocketInfo.data.color || 'black', '--color':pocketInfo.data.color, '--background-activated':'#fff', '--color-activated':'#ccc' }} expand="block" shape="round" fill="outline">Edit</IonButton>
               </IonCol>
             <IonCol>
-            <IonButton expand="block">Block Button</IonButton>
+              <IonButton style={{'--background':pocketInfo.data.color || 'black', '--background-activated':'#ccc'}} expand="block" shape="round">Invite Friend</IonButton>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -101,13 +124,12 @@ const Goal: React.FC = () => {
                   </IonGrid>
                 </IonCardContent>
               </IonCard>
-              
             </IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>
     </IonPage>
-  );
+  : <IonPage></IonPage>);
 };
 
 export default Goal;
