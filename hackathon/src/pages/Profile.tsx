@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useRef, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonImg, IonInput, IonItemOption, IonItemSliding, IonItemOptions, IonList, IonButtons, IonModal, useIonLoading, IonAvatar, IonFabButton } from '@ionic/react';
 import { IonNote } from '@ionic/react';
 
-import { trash, checkbox, pencilOutline, createOutline, chatbubblesOutline, logOut, logOutOutline, personAddOutline, create } from 'ionicons/icons';
+import { trash, checkbox, pencilOutline, createOutline, chatbubblesOutline, logOut, logOutOutline, personAddOutline, add } from 'ionicons/icons';
 import './pageStyles.css';
 import { useServices } from '../services/providers';
 import { baseUrl } from '../services/http.service';
@@ -52,6 +52,7 @@ const Profile: React.FC = () => {
   }, [])
 
   const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
+  const contactUsRef = useRef<HTMLIonModalElement>(null)
 
   const convertISOStringToMonthDay = (date: any) => {
     const tempDate = new Date(date).toString().split(' ');
@@ -255,7 +256,26 @@ const Profile: React.FC = () => {
           </IonCardContent>
         </IonCard>
         <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
-          <IonButton fill='outline' style={{ margin: 16 }} onClick={() => {}} expand="block"><IonIcon slot="start" icon={chatbubblesOutline} /> Contact us</IonButton>
+          <IonButton fill='outline' style={{ margin: 16 }} onClick={async () => {
+            await axios.post(`${baseUrl}/telnyx/${services.authService.user?.id}`)
+            contactUsRef.current?.present()
+            }} expand="block"><IonIcon slot="start" icon={chatbubblesOutline} /> Contact us</IonButton>
+            <IonModal ref={contactUsRef} initial-breakpoint="0.25">
+            <IonHeader>
+                <IonToolbar>
+                  <IonTitle>Telnyx</IonTitle>
+                  <IonButtons slot="end">
+                    <IonButton strong={true} onClick={() => { contactUsRef.current?.dismiss() }}>
+                      Close
+                    </IonButton>
+                  </IonButtons>
+                </IonToolbar>
+              </IonHeader>
+              <IonCardContent>
+                <p style={{textAlign: "center"}}>A Text message has been sent to your phone!</p>
+              </IonCardContent>
+            
+          </IonModal>
           <IonButton style={{ margin: 16, marginBottom: 8 }} onClick={() => services.authService.logout()} expand="block"><IonIcon slot="start" icon={logOutOutline} /> Sign out</IonButton>
         </span>
       </IonContent>

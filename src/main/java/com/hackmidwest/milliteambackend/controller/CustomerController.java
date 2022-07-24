@@ -40,6 +40,11 @@ public class CustomerController {
   public ResponseEntity<Customer> getCustomerById(@PathVariable String customerId){
     return ResponseEntity.ok(customerService.getCustomerById(customerId).get());
   }
+@GetMapping("/fullTextSearch")
+public ResponseEntity<List<Customer>> fullTextSearch(String searchPhrase) {
+    return ResponseEntity.ok(customerService.fullTextSearch(searchPhrase));
+}
+
 
   @GetMapping
   public ResponseEntity<List<Customer>> getAllCustomers(){
