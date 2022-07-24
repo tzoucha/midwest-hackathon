@@ -47,7 +47,10 @@ const Goal: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol size='12' style={{textAlign: 'center'}}>
-              <img style={{width: '50%', borderRadius: '50%', border: `4px ${pocketInfo.data.color} solid`}} src={`${baseUrl}/profile-pic/${pocketInfo.data.picture}`}/>
+              <IonAvatar style={{width: 'auto', height: 'auto'}}>
+                <img src={`${baseUrl}/profile-pic/${pocketInfo.data.picture}`} />
+                {/* <IonButton color='light' style={{position: 'absolute', top: 0, right: 0}} onClick={() => filePicker.current?.click()}><IonIcon icon={createOutline} size='large' /></IonButton> */}
+              </IonAvatar>
             </IonCol>
           </IonRow>
           <IonRow>
