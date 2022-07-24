@@ -26,7 +26,7 @@ public class PinataService {
   CustomerRepository repo;
 
   WebClient milliGateway = WebClient.builder()
-      .baseUrl("https://gateway.pinata.cloud/ipfs/").build();
+      .baseUrl("https://milli.mypinata.cloud/ipfs/").build();
 
   WebClient submarineApi = WebClient.builder()
       .baseUrl("https://managed.mypinata.cloud/api/v1/").build();

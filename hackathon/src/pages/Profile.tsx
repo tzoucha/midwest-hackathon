@@ -5,6 +5,7 @@ import { IonNote } from '@ionic/react';
 import { trash, checkbox } from 'ionicons/icons';
 import './pageStyles.css';
 import { useServices } from '../services/providers';
+import { baseUrl } from '../services/http.service';
 
 const Profile: React.FC = () => {
   const services = useServices();
@@ -23,10 +24,12 @@ const Profile: React.FC = () => {
     "And the river that cleanses me runs alone",
     "To be there again where my spirit longs",
     "And sleep in the soil forevermore"]
-  const [name, setName] = useState<string>("Travis Zoucha");
-  const [email, setEmail] = useState<string>("TheBestEngineer@gmail.com");
-  const [address, setAddress] = useState<string>("19622 Gail Ave Omaha, NE 68135");
-  const [phone, setPhone] = useState<string>("5317774149");
+  const [name, setName] = useState<string>(`${services.authService.user?.firstName} ${services.authService?.user?.lastName}`);
+  const [email, setEmail] = useState<string>(services.authService.user?.emailAddress || '');
+  const [address, setAddress] = useState<string>(services.authService.user?.addressLine1 || '');
+  const [city, setCity] = useState<string>(services.authService.user?.city || '');
+  const [state, setState] = useState<string>(services.authService.user?.state || '');
+  const [phone, setPhone] = useState<string>(services.authService.user?.phoneNumber || '');
   const [readOnly, setReadOnly] = useState<boolean>(true)
 
   const addAFriendModalRef = useRef<HTMLIonModalElement>(null)
@@ -46,7 +49,7 @@ const Profile: React.FC = () => {
         </IonHeader>
         <IonCard>
           <IonCardHeader>
-            <IonCardSubtitle><IonImg src={process.env.PUBLIC_URL + '/profile_pic.jpeg'} /></IonCardSubtitle>
+            <IonCardSubtitle><IonImg src={`${baseUrl}/profile-pic/${services.authService.user?.profilePicture}`} /></IonCardSubtitle>
             <IonCardTitle>{name}</IonCardTitle>
           </IonCardHeader>
 
@@ -58,6 +61,14 @@ const Profile: React.FC = () => {
             <IonItem style={{ marginBottom: "10px" }}>
               <IonLabel position="floating">Address</IonLabel>
               <IonInput readonly={readOnly} value={address} onIonChange={e => setAddress(e.detail.value!)}></IonInput>
+            </IonItem>
+            <IonItem style={{ marginBottom: "10px" }}>
+              <IonLabel position="floating">City</IonLabel>
+              <IonInput readonly={readOnly} value={city} onIonChange={e => setCity(e.detail.value!)}></IonInput>
+            </IonItem>
+            <IonItem style={{ marginBottom: "10px" }}>
+              <IonLabel position="floating">State</IonLabel>
+              <IonInput readonly={readOnly} value={state} onIonChange={e => setState(e.detail.value!)}></IonInput>
             </IonItem>
             <IonItem style={{ marginBottom: "10px" }}>
               <IonLabel position="floating">Phone</IonLabel>
