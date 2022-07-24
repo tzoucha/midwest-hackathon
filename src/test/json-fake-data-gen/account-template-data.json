@@ -18,10 +18,10 @@
   {
     "_id": {"$oid":"62dcb3e0e53d9f1a3c7e7498"},
     "customerIds": [
-      "62dc92710f1628ffcdb819b3","62dc9271ce855b907f8d4f97"
+      "62dc9271157b8d7fd5f07d76","62dc92717bf8ae1811066831", "62dc927115da4f70866876b8", "62dc92710229952bc52fac4c", "62dc927113fc9df8ddf6d6b0", "62dc9271ba69ac3c7b3c6228", "62dc9271b2d5a2e84a15b1bb", "62dc927137a20c42021a6138", "62dc927155e804d18d215c74", "62dc9271ad75e1143a251a16", "62dc9271ce855b907f8d4f97", "62dc92710f1628ffcdb819b3", "62dc9271aa32c0c1926cfc34"
     ],
     "balance": "1447.44",
-    "primaryOwnerCustomerId": "62dcb3e05c547982d3998715",
+    "primaryOwnerCustomerId": "62dc9271259bff25f586f167",
     "description": "Quarterly Charity Pocket, PC will will match all contributions until goal is fulfilled.",
     "picture": "6bce9447-12f1-419d-beb2-35f3ecb6a58f",
     "goal": "20000.00",
@@ -34,10 +34,10 @@
   {
     "_id": {"$oid":"62dcb3e082b99e6eedb7cc16"},
     "customerIds": [
-      "62dc9271ad75e1143a251a16","62dc927155e804d18d215c74","62dc927137a20c42021a6138", "62dc92716bc26b9953a78dab"
+      "62dc9271ad75e1143a251a16","62dc927155e804d18d215c74", "62dc92716bc26b9953a78dab"
     ],
     "balance": "2338.15",
-    "primaryOwnerCustomerId": "62dcb3e09f377ae3074df530",
+    "primaryOwnerCustomerId": "62dc927137a20c42021a6138",
     "description": "Frankie needs a lotta work",
     "picture": "8dbdfb02-f90d-4e53-83c6-fcb5f3a76f25",
     "goal": "100000.00",
@@ -50,10 +50,10 @@
   {
     "_id": {"$oid":"62dcb3e05da0a885384c1a0b"},
     "customerIds": [
-      "62dc9271b2d5a2e84a15b1bb","62dc9271ba69ac3c7b3c6228", "62dc92716bc26b9953a78dab"
+      "62dc9271b2d5a2e84a15b1bb","62dc9271ba69ac3c7b3c6228"
     ],
-    "balance": "929.13",
-    "primaryOwnerCustomerId": "62dcb3e0cc842381a58d767c",
+    "balance": "328.13",
+    "primaryOwnerCustomerId": "62dc92716bc26b9953a78dab",
     "description": "Thank god I am still alive",
     "picture": "3f7f3c29-42eb-472d-a3c8-df1ceb77b0c3",
     "goal": "2333.30",
@@ -66,9 +66,9 @@
   {
     "_id": {"$oid":"62dcb3e021b89aa1efbd73ec"},
     "customerIds": [
-      "62dc927113fc9df8ddf6d6b0","62dc92710229952bc52fac4c"
+      "62dc927113fc9df8ddf6d6b0","c"
     ],
-    "balance": "2026.29",
+    "balance": "1026.29",
     "primaryOwnerCustomerId": "62dcb3e0147e9f91689ae764",
     "description": "Need to get my bronze on",
     "picture": "45914d7c-4345-4848-9857-a8d73ab4c896",

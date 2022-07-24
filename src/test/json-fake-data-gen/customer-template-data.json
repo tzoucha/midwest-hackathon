@@ -162,7 +162,7 @@
     "firstName": "Dennis",
     "lastName": "Wolf",
     "password": "milli123",
-    "profilePicture": "e71d72c3-c436-4b37-8fb3-e71b9c2aaff9e",
+    "profilePicture": "64b74cae-e6b5-4c34-ac14-56339da67d87",
     "emailAddress": "Charity@milli-bank.com",
     "addressLine1": "883 Veterans Avenue",
     "city": "Jacksonburg",
@@ -244,7 +244,6 @@
   },
   {
     "_id": {"$oid":"62dc9271259bff25f586f167"},
-
     "firstName": "Lorene",
     "lastName": "Cherry",
     "password": "milli123",
