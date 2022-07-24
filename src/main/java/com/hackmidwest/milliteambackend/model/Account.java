@@ -28,6 +28,7 @@ public class Account {
   public LocalDate startDate;
   public LocalDate endDate;
   public String title;
+  public String color;
 
   public String getId() {
     return id;
@@ -128,6 +129,15 @@ public class Account {
     return this;
   }
 
+  public String getColor() {
+    return color;
+  }
+
+  public Account setColor(String color) {
+    this.color = color;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -147,13 +157,14 @@ public class Account {
         Objects.equals(goal, account.goal) &&
         Objects.equals(startDate, account.startDate) &&
         Objects.equals(endDate, account.endDate) &&
-        Objects.equals(title, account.title);
+        Objects.equals(title, account.title) &&
+        Objects.equals(color, account.color);
   }
 
   @Override
   public int hashCode() {
     return Objects
         .hash(id, customerIds, balance, type, primaryOwnerCustomerId, description, picture, goal,
-            startDate, endDate, title);
+            startDate, endDate, title, color);
   }
 }
