@@ -61,4 +61,10 @@ public class CustomerController {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<Customer> dropAllCustomers(){
+    customerService.dropAllCustomers();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
 }
