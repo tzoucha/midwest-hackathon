@@ -15,5 +15,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InvitationRepository extends MongoRepository<Invitation, String> {
-  public List<Invitation> findByToCustomerId(String toCustomerId);
+  List<Invitation> findByToCustomerId(String toCustomerId);
 }
