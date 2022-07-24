@@ -63,4 +63,8 @@ public class TransactionService {
 
     return transactionRepository.save(transaction);
   }
+
+  public void dropAllTransactions(){
+    transactionRepository.deleteAll();
+  }
 }
