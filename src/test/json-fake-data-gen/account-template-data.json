@@ -1,0 +1,82 @@
+[
+  {
+    "id": "62dcb3e0244aaff5d2ff0771",
+    "customerIds": [
+      "62dc9271259bff25f586f167","62dc9271aa32c0c1926cfc34","62dc92716bc26b9953a78dab"
+    ],
+    "balance": "$3,723.80",
+    "primaryOwnerCustomerId": "62dcb3e0740681def17e8477",
+    "description": "Test Jar for S&Gs",
+    "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+    "goal": "$1,230.87",
+    "startDate": "2022-01-04T06:17:15",
+    "endDate": "2018-04-10T04:40:19",
+    "color": "#F44336",
+    "title": "Wounded Warriors",
+    "_class": "com.hackmidwest.milliteambackend.model.Account"
+  },
+  {
+    "id": "62dcb3e0e53d9f1a3c7e7498",
+    "customerIds": [
+      "62dc92710f1628ffcdb819b3","62dc9271ce855b907f8d4f97"
+    ],
+    "balance": "$1,447.44",
+    "primaryOwnerCustomerId": "62dcb3e05c547982d3998715",
+    "description": "Test Jar for S&Gs",
+    "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+    "goal": "$1,587.29",
+    "startDate": "2016-08-27T11:19:09",
+    "endDate": "2015-06-20T07:52:44",
+    "color": "#E91E63",
+    "title": "Wounded Warriors",
+    "_class": "com.hackmidwest.milliteambackend.model.Account"
+  },
+  {
+    "id": "62dcb3e082b99e6eedb7cc16",
+    "customerIds": [
+      "62dc9271ad75e1143a251a16","62dc927155e804d18d215c74","62dc927137a20c42021a6138"
+    ],
+    "balance": "$2,338.15",
+    "primaryOwnerCustomerId": "62dcb3e09f377ae3074df530",
+    "description": "Test Jar for S&Gs",
+    "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+    "goal": "$1,802.79",
+    "startDate": "2014-07-27T10:34:26",
+    "endDate": "2020-10-29T09:51:34",
+    "color": "#9C27B0",
+    "title": "Wounded Warriors",
+    "_class": "com.hackmidwest.milliteambackend.model.Account"
+  },
+  {
+    "id": "62dcb3e05da0a885384c1a0b",
+    "customerIds": [
+      "62dc9271b2d5a2e84a15b1bb","62dc9271ba69ac3c7b3c6228"
+    ],
+    "balance": "$3,929.13",
+    "primaryOwnerCustomerId": "62dcb3e0cc842381a58d767c",
+    "description": "Test Jar for S&Gs",
+    "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+    "goal": "$3,633.30",
+    "startDate": "2016-05-16T12:32:15",
+    "endDate": "2016-09-18T09:20:28",
+    "color": "#673AB7",
+    "title": "Wounded Warriors",
+    "_class": "com.hackmidwest.milliteambackend.model.Account"
+  },
+  {
+    "id": "62dcb3e021b89aa1efbd73ec",
+    "customerIds": [
+      "62dc927113fc9df8ddf6d6b0","62dc92710229952bc52fac4c"
+    ],
+    "balance": "$2,026.29",
+    "primaryOwnerCustomerId": "62dcb3e0147e9f91689ae764",
+    "description": "Test Jar for S&Gs",
+    "picture": "88bc65c0-e4a8-44f3-8cbd-32082bb5655d",
+    "goal": "$1,073.11",
+    "startDate": "2018-08-19T01:50:03",
+    "endDate": "2020-03-20T04:07:03",
+    "color": "#3F51B5",
+    "title": "Wounded Warriors",
+    "_class": "com.hackmidwest.milliteambackend.model.Account"
+  }
+]
