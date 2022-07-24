@@ -25,6 +25,7 @@ const Profile: React.FC = () => {
     "And the river that cleanses me runs alone",
     "To be there again where my spirit longs",
     "And sleep in the soil forevermore"]
+  const [pic, setPic] = useState<string>(`${services.authService.user?.profilePicture}`)
   const [name, setName] = useState<string>(`${services.authService.user?.firstName} ${services.authService?.user?.lastName}`);
   const [email, setEmail] = useState<string>(services.authService.user?.emailAddress || '');
   const [address, setAddress] = useState<string>(services.authService.user?.addressLine1 || '');
@@ -50,7 +51,7 @@ const Profile: React.FC = () => {
         </IonHeader>
         <IonCard>
           <IonCardHeader>
-            <IonCardSubtitle><IonImg src={`${baseUrl}/profile-pic/${services.authService.user?.profilePicture}`} /></IonCardSubtitle>
+            <IonCardSubtitle><IonImg src={`${baseUrl}/profile-pic/${pic}`} /></IonCardSubtitle>
             <IonCardTitle>{name}</IonCardTitle>
             {!readOnly && <input type="file" onChange={async (e) => {
               const file = e.target.files?.[0]
@@ -69,8 +70,10 @@ const Profile: React.FC = () => {
                 };
           
                 try {
-                  const result = (await axios(config)).data
-                  console.log(result)
+                  const result = (await axios(config)).data;
+                  (services.authService.user as any).profilePicture = result.items[0].id
+                  await services.authService.updateUser();
+                  setPic(services.authService.user?.profilePicture || '')
                 } catch(e) {
                   console.error(e);
                 }

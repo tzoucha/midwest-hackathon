@@ -66,6 +66,9 @@ export class AuthService {
       return false;
     }
   }
+  async updateUser() {
+    await storageService.storage.set(USER_TOKEN_KEY, JSON.stringify(this.user))
+  }
   async logout() {
     this.user = undefined;
     await storageService.storage.remove(USER_TOKEN_KEY);
