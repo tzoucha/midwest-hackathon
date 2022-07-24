@@ -9,6 +9,7 @@ if [ $retVal -ne 0 ]; then
   npm run build
 fi
 cd -
+git add -A && git commit -m "Heroku Deployment checkin" && git push
 ./mvnw clean install
 
 git push heroku main
