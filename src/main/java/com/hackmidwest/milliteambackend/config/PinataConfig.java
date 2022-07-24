@@ -8,9 +8,15 @@ import lombok.Setter;
 
 @ConfigurationProperties("pinata")
 @Configuration
-@Getter
-@Setter
 public class PinataConfig {
   private String apiKey;
-  
+
+  public String getApiKey() {
+    return apiKey;
+  }
+
+  public PinataConfig setApiKey(String apiKey) {
+    this.apiKey = apiKey;
+    return this;
+  }
 }

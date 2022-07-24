@@ -1,5 +1,11 @@
 package com.hackmidwest.milliteambackend.service;
 
+import com.hackmidwest.milliteambackend.config.PinataConfig;
+import com.hackmidwest.milliteambackend.model.PinataUploadResponse;
+import com.hackmidwest.milliteambackend.repo.CustomerRepository;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +23,6 @@ import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Slf4j
 @Service
 public class PinataService {
   @Autowired
@@ -36,7 +41,22 @@ public class PinataService {
       .baseUrl("https://managed.mypinata.cloud/api/v1/").build();
 
   public Mono<byte[]> getPinataNFT(String id) {
-    return milliGateway.get().uri(id)
+    Map<String,Object> body = new HashMap<>();
+    body.put("timeoutSeconds", 3600);
+    body.put("contentIds", Collections.singletonList(id));
+
+    String resp = submarineApi.post().uri("/auth/content/jwt")
+        .header("x-api-key", config.getApiKey())
+        .header("Content-Type", "application/json")
+        .body(BodyInserters.fromValue(body)).retrieve().bodyToMono(String.class).doOnError(r -> r.printStackTrace()).block();
+
+    PinataUploadResponse content  = submarineApi.get().uri("/content/" + id)
+        .header("x-api-key", config.getApiKey())
+        .header("Content-Type", "application/json")
+        .retrieve().bodyToMono(PinataUploadResponse.class).doOnError(r -> r.printStackTrace()).block();
+
+
+    return milliGateway.get().uri(content.item.getCid() + "?accessToken=" + resp.replaceAll("\"", ""))
         // .header("x-api-key", config.getApiKey())
         .retrieve()
         .bodyToMono(byte[].class);
@@ -58,10 +78,9 @@ public class PinataService {
         .body(BodyInserters.fromMultipartData(builder.build()))
         .exchangeToMono(response -> {
           if (response.statusCode().equals(HttpStatus.OK)) {
-          
             return response.bodyToMono(PinataUploadResponse.class);
           } else {
-            log.error("Error uploading data", response.bodyToMono(String.class));
+            System.out.println("Error uploading data " + response.bodyToMono(String.class));
             throw new RuntimeException("Error uploading");
             // throw new RuntimeException("Error uploading file" +
             // response.bodyToMono(String.class).block());
@@ -69,34 +88,18 @@ public class PinataService {
         }).doOnSuccess(result -> {
           if (profilePic) {
             repo.findById(userId).ifPresent(customer -> {
-              customer.setProfilePicture(result.items.get(0).cid);
+              customer.setProfilePicture(result.items.get(0).id);
               repo.save(customer);
             });
-          } else {
+          } else  {
             accountRepo.findById(userId).ifPresent(account -> {
-              account.setPicture(result.items.get(0).cid);
+              account.setPicture(result.items.get(0).id);
               accountRepo.save(account);
-            });
+            })
           }
           
         }).block();
 
   }
 
-  // data.append('files',
-  // fs.createReadStream('/Users/battousai/repos/midwest-hackathon/hackathon/public/profile_pic.jpeg'));
-  // data.append('name', 'My File');
-  // data.append('metadata', '{"keyvalues": { "example": "value" }}');
-  // data.append('wrapWithDirectory', 'false');
-  // data.append('pinToIPFS', 'false');
-
-  // var config = {
-  // method: 'post',
-  // url: 'https://managed.mypinata.cloud/api/v1/content',
-  // headers: {
-  // 'x-api-key': 'j0o7Iq0m4KWbK2b5co1igo3iOfNC4ZSS',
-  // ...data.getHeaders()
-  // },
-  // data : data
-  // };
 }
