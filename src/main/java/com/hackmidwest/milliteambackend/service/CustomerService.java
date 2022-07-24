@@ -12,6 +12,8 @@ package com.hackmidwest.milliteambackend.service;
 import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.repo.CustomerRepository;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +28,8 @@ public class CustomerService {
   public List<Customer> getAllCustomers(){
     return customerRepository.findAll();
   }
+
+  public Optional<Customer> getCustomer(String customerId) {return customerRepository.findById(customerId);}
 
   public Customer createOrUpdateCustomer(Customer customer, boolean create){
     if (create) {
