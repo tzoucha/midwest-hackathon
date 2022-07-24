@@ -9,11 +9,14 @@
  */
 package com.hackmidwest.milliteambackend.controller;
 
+import com.hackmidwest.milliteambackend.model.Customer;
 import com.hackmidwest.milliteambackend.model.Transaction;
 import com.hackmidwest.milliteambackend.service.TransactionService;
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +43,12 @@ public class TransactionController {
   @PostMapping
   public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction){
     return ResponseEntity.ok(transactionService.createTransaction(transaction));
+  }
+
+  @DeleteMapping("/delete-all")
+  public ResponseEntity<Customer> dropAllCustomers(){
+    transactionService.dropAllTransactions();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 
 }

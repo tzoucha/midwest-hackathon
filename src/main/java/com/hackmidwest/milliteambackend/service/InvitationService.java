@@ -35,8 +35,8 @@ public class InvitationService {
     this.accountRepository = accountRepository;
   }
 
-  public List<Invitation> getInvitationsForCustomerAndType(String customerId, String type){
-    return invitationRepository.findByToCustomerIdAndType(customerId, type);
+  public List<Invitation> getInvitationsForCustomer(String customerId){
+    return invitationRepository.findByToCustomerId(customerId);
   }
 
   public Invitation createFriendInvitation(String toCustomer, String fromCustomer){

@@ -11,10 +11,8 @@ package com.hackmidwest.milliteambackend.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import org.springframework.data.annotation.Id;
 
 public class Transaction {
-  @Id
   public String id;
   public BigDecimal amount;
   public String fromAccountId;
@@ -22,23 +20,12 @@ public class Transaction {
   public String description;
   public LocalDateTime transactionDateTime;
   public String executingCustomerId;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public String name;
-
+  public String profilePicture;
 
   public String getId() {
     return id;
   }
-
-
 
   public Transaction setId(String id) {
     this.id = id;
@@ -96,6 +83,24 @@ public class Transaction {
 
   public Transaction setExecutingCustomerId(String executingCustomerId) {
     this.executingCustomerId = executingCustomerId;
+    return this;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Transaction setName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public String getProfilePicture() {
+    return profilePicture;
+  }
+
+  public Transaction setProfilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
     return this;
   }
 }

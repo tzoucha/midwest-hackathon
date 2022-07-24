@@ -34,9 +34,9 @@ public class InvitationController {
     this.invitationService = invitationService;
   }
 
-  @GetMapping("/{customerId}/{type}")
-  public ResponseEntity<List<Invitation>> getInvitationsForCustomerByType(@PathVariable String customerId,@PathVariable String type){
-    return ResponseEntity.ok(invitationService.getInvitationsForCustomerAndType(customerId, type));
+  @GetMapping("/{customerId}")
+  public ResponseEntity<List<Invitation>> getInvitationsForCustomerByType(@PathVariable String customerId){
+    return ResponseEntity.ok(invitationService.getInvitationsForCustomer(customerId));
   }
 
   @PostMapping("/friend")
