@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
                       </IonRow>
                       <IonRow>
                         <IonCol style={{textAlign:'right'}}>
-                          <IonButton style={{'--background':quarterlyPocketInfo?.data.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${quarterlyPocketInfo?.data.id}`}>View Pocket</IonButton>
+                          <IonButton style={{'--background':quarterlyPocketInfo?.data.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' href={`/goal/${quarterlyPocketInfo?.data.id}`}>View Pocket</IonButton>
                         </IonCol>
                       </IonRow>
                     </IonGrid>
@@ -127,7 +127,7 @@ const Dashboard: React.FC = () => {
                         </IonRow>
                         <IonRow>
                           <IonCol style={{textAlign:'right'}}>
-                            <IonButton style={{'--background':pocket.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' routerLink={`/goal/${pocket.id}`}>View Pocket</IonButton>
+                            <IonButton style={{'--background':pocket.color || 'black', '--background-activated':'#ccc'}} shape="round" expand="block" size='small' href={`/goal/${pocket.id}`}>View Pocket</IonButton>
                           </IonCol>
                         </IonRow>
                       </IonGrid>
@@ -136,7 +136,6 @@ const Dashboard: React.FC = () => {
               </IonCol>
             </IonRow>
           )}
-          {/* <IonButton expand="block" shape="round" routerLink="/create-goal"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton> */}
         </IonGrid>
         <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
           <IonButton shape="round" style={{ margin: 16 }} routerLink="/create-goal" expand="block"><IonIcon slot="start" icon={addCircleOutline} /> Open New Pocket</IonButton>
