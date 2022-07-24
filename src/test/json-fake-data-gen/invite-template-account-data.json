@@ -54,5 +54,19 @@
     "type": "ACCOUNT",
     "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc92716bc26b9953a78dab",
+    "fromId": "62dcb3e0244aaff5d2ff0771",
+    "type": "ACCOUNT",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc92716bc26b9953a78dab",
+    "fromId": "62dcb3e021b89aa1efbd73ec",
+    "type": "ACCOUNT",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   }
 ]

@@ -2,7 +2,7 @@
   {
     "_id": {"$oid":"62dcb3e0244aaff5d2ff0771"},
     "customerIds": [
-      "62dc9271259bff25f586f167","62dc9271aa32c0c1926cfc34","62dc92716bc26b9953a78dab"
+      "62dc9271259bff25f586f167","62dc9271aa32c0c1926cfc34"
     ],
     "balance": "723.80",
     "primaryOwnerCustomerId": "62dcb3e0740681def17e8477",
@@ -34,12 +34,12 @@
   {
     "_id": {"$oid":"62dcb3e082b99e6eedb7cc16"},
     "customerIds": [
-      "62dc9271ad75e1143a251a16","62dc927155e804d18d215c74","62dc927137a20c42021a6138"
+      "62dc9271ad75e1143a251a16","62dc927155e804d18d215c74","62dc927137a20c42021a6138", "62dc92716bc26b9953a78dab"
     ],
     "balance": "2338.15",
     "primaryOwnerCustomerId": "62dcb3e09f377ae3074df530",
     "description": "Frankie needs a lotta work",
-    "picture": "3a775da5-4231-4036-a6f6-e417eb9c811f",
+    "picture": "eea096f6-1cbf-417e-923d-f4a381a70206",
     "goal": "100000.00",
     "startDate": "2014-07-27",
     "endDate": "2023-10-29",
@@ -50,9 +50,9 @@
   {
     "_id": {"$oid":"62dcb3e05da0a885384c1a0b"},
     "customerIds": [
-      "62dc9271b2d5a2e84a15b1bb","62dc9271ba69ac3c7b3c6228"
+      "62dc9271b2d5a2e84a15b1bb","62dc9271ba69ac3c7b3c6228", "62dc92716bc26b9953a78dab"
     ],
-    "balance": "3929.13",
+    "balance": "929.13",
     "primaryOwnerCustomerId": "62dcb3e0cc842381a58d767c",
     "description": "Thank god I am still alive",
     "picture": "bf530530-a547-4242-b551-d33475b9ca74",

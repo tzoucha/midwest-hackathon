@@ -47,5 +47,19 @@
     "type": "FRIEND",
     "sentDateTime": "2022-07-24T04:28:07.893+00:00",
     "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc92716bc26b9953a78dab",
+    "fromId": "62dc9271aa32c0c1926cfc34",
+    "type": "FRIEND",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
+  },
+  {
+    "toCustomerId": "62dc92716bc26b9953a78dab",
+    "fromId": "62dc927137a20c42021a6138",
+    "type": "FRIEND",
+    "sentDateTime": "2022-07-24T04:28:07.893+00:00",
+    "_class": "com.hackmidwest.milliteambackend.model.Invitation"
   }
 ]
