@@ -1,6 +1,7 @@
-import { IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonContent, IonDatetime, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react"
+import { IonAvatar, IonBackButton, IonButton, IonButtons, IonCard, IonCardContent, IonCardSubtitle, IonContent, IonDatetime, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import axios from "axios"
-import { useState } from "react"
+import { pencilOutline } from "ionicons/icons"
+import { useRef, useState } from "react"
 import { CirclePicker } from 'react-color'
 import { baseUrl } from "../services/http.service"
 import { useServices } from "../services/providers"
@@ -8,6 +9,10 @@ import { useServices } from "../services/providers"
 export const CreateGoal = () => {
   const services = useServices()
   const [values, setValues] = useState({} as {
+    image?: {
+      file?: File,
+      dataUrl?: string
+    }
     title?: string, 
     description?: string, 
     color?: string,
@@ -15,18 +20,40 @@ export const CreateGoal = () => {
     endDate?: string | number 
   })
   const [error, setError] = useState(null as any)
-  const ionValueProps = (name: string) => ({value: values[name as keyof typeof values], onIonChange: (e: any) => setValues(vs => ({...vs, [name]: e.detail.value}))})
+  const ionValueProps = (name: string) => ({value: values[name as Exclude<keyof typeof values, 'image'>], onIonChange: (e: any) => setValues(vs => ({...vs, [name]: e.detail.value}))})
   const submit = async () => {
+    const {image, ...nonImageProps} = values;
     const body = {
-      ...values,
+      ...nonImageProps,
       customerIds: [],
       balance: 0,
       primaryOwnerCustomerId: services.authService.user?.id,
       startDate: new Date().toISOString().split('T')[0],
-      endDate: values.endDate ? new Date(values.endDate).toISOString().split('T')[0] : undefined
+      endDate: values.endDate ? new Date(values.endDate).toISOString().split('T')[0] : undefined,
     }
     try {
-      await axios.post(`${baseUrl}/accounts`, body)
+      const result = (await axios.post(`${baseUrl}/accounts`, body)).data
+      if(image?.file) {
+        var data = new FormData();
+        data.append('image', image.file);
+        data.append('id', result.id || '');
+        data.append('customer', 'false');
+        var config = {
+          method: 'post',
+          url: `${baseUrl}/profile-pic`,
+          headers: {
+            'content-type': 'multipart/form-data'
+          },
+          data: data
+        };
+        try {
+          const result = (await axios(config)).data;
+          console.log("Updated account image", result)
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      
       window.location.href = '/dashboard'
     } catch(e: any) {
       console.error(e);
@@ -34,6 +61,7 @@ export const CreateGoal = () => {
     }
 
   }
+  const filePicker = useRef<HTMLInputElement>(null)
   return (<IonPage>
     <IonHeader>
       <IonToolbar>
@@ -52,6 +80,29 @@ export const CreateGoal = () => {
       <IonCard style={{marginBottom: 100}}>
         <IonCardContent>
           <IonList>
+            <IonItem>
+              <IonCardSubtitle>
+                <IonAvatar style={{ width: 'auto', height: 'auto' }}>
+                  <img src={values.image?.dataUrl || `${process.env.PUBLIC_URL}/assets/logo-header.png`} />
+                  <IonFabButton color='secondary' style={{ position: 'absolute', top: 0, right: 0 }} onClick={() => filePicker.current?.click()}><IonIcon icon={pencilOutline} /></IonFabButton>
+                </IonAvatar>
+              </IonCardSubtitle>
+              <input type="file" style={{ display: 'none' }} ref={filePicker} onChange={async (e) => {
+                const file = e.target.files?.[0]
+                if(file) {
+                  const dataUrl = await new Promise<string>((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                      resolve(reader.result as string)
+                    }
+                    reader.readAsDataURL(file)
+                  })
+                  setValues(vs => ({...vs, image: {file, dataUrl}}));
+                } else {
+                  console.error("No file selected");
+                }
+              }} />
+            </IonItem>
             <IonItem>
               <IonLabel position="floating">Title</IonLabel>
               <IonInput {...ionValueProps('title')} />
