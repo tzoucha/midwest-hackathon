@@ -32,7 +32,6 @@ public class CustomerService {
   public Optional<Customer> getCustomerById(String customerId){
     return customerRepository.findById(customerId);
   }
-  public Optional<Customer> getCustomer(String customerId) {return customerRepository.findById(customerId);}
 
   public Customer createOrUpdateCustomer(Customer customer, boolean create){
     if (create) {
