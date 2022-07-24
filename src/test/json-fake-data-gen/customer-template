@@ -7,7 +7,7 @@
   "firstName": '{{firstName()}}',
   "lastName": '{{surname()}}',
   "password": "milli123",
-  "profilePicture": "https://myprofilepic@pinata.com",
+  "profilePicture": "bafkreicn32rxxi4dvyahj5dleuywisddraxnqk3s3myqgrpxia7uuuw2ey",
   "emailAddress": '{{firstName()}}'+"@milli-bank.com",
   "addressLine1": '{{integer(100, 999)}} {{street()}}',
   "city": '{{city()}}',
