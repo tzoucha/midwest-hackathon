@@ -20,7 +20,7 @@ public class SpaErrorController implements ErrorController {
       response.setStatus(HttpStatus.OK.value()); // optional.
       return "forward:/index.html"; // forward to static SPA html resource.
     } else {
-      return ResponseEntity.notFound().build(); // or your REST 404 blabla...
+      return response;
     }
   }
 
