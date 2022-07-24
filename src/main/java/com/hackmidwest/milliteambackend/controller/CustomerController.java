@@ -41,12 +41,12 @@ public class CustomerController {
 
   @PostMapping
   public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer, false));
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer));
+    return ResponseEntity.ok(customerService.createOrUpdateCustomer(customer, true));
   }
 
   @PostMapping("/login")
