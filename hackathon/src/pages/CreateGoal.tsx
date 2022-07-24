@@ -49,7 +49,7 @@ export const CreateGoal = () => {
           <IonTitle size="large">Create Pocket</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonCard>
+      <IonCard style={{marginBottom: 100}}>
         <IonCardContent>
           <IonList>
             <IonItem>
@@ -75,13 +75,15 @@ export const CreateGoal = () => {
               <CirclePicker colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3", "#03a9f4", "#00bcd4", "#009688", "#4caf50", "#8bc34a", "#ff9800"]} onChange={(color) => setValues(vs => ({...vs, color: color.hex}))}/>
               </div>
             </IonItem>
-            <IonButton style={{ marginLeft: 16, marginRight: 16}} onClick={submit} expand="block">Create Goal</IonButton>
             {error && <IonItem slot="error" style={{color: 'red'}}>
               {error?.message || error}
             </IonItem>}
           </IonList>
         </IonCardContent>
       </IonCard>
+      <span style={{position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white'}}>
+        <IonButton style={{ margin: 16 }} onClick={submit} expand="block">Create Goal</IonButton>
+      </span>
     </IonContent>
   </IonPage>)
 }
