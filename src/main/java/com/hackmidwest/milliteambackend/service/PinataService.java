@@ -95,7 +95,7 @@ public class PinataService {
             accountRepo.findById(userId).ifPresent(account -> {
               account.setPicture(result.items.get(0).id);
               accountRepo.save(account);
-            })
+            });
           }
           
         }).block();

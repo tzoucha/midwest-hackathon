@@ -2,9 +2,9 @@ var axios = require('axios');
 var FormData = require('form-data');
 var fs = require('fs');
 var data = new FormData();
-data.append('files', fs.createReadStream('/Users/battousai/Downloads/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpeg'));
+data.append('files', fs.createReadStream('/Users/battousai/Downloads/Pocket Change-1.png'));
 data.append('name', 'Test File2');
-data.append('metadata', '{"type": "Default"}');
+data.append('metadata', '{"keyvalues": { "example": "value" }}');
 data.append('wrapWithDirectory', 'false');
 data.append('pinToIPFS', 'false');
 console.log("HERE", data.getHeaders())
