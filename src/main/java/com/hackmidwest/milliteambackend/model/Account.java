@@ -13,10 +13,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import org.springframework.data.annotation.Id;
 
 public class Account {
-  @Id
   public String id;
   public List<String> customerIds;
   public BigDecimal balance;
