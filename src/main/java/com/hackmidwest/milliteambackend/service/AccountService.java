@@ -31,6 +31,10 @@ public class AccountService {
     return ret;
   }
 
+  public Account findAccountByAccountId(String accountId){
+    return accountRepository.findById(accountId).get();
+  }
+
   public void closeAccount(String accountId){
     accountRepository.deleteById(accountId);
   }

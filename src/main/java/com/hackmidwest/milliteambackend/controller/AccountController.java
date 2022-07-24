@@ -40,6 +40,11 @@ public class AccountController {
     return ResponseEntity.ok(accountService.findAccountsForCustomer(customerId));
   }
 
+  @GetMapping("/details/{accountId}")
+  public ResponseEntity<Account> findAccountById(String accountId){
+    return ResponseEntity.ok(accountService.findAccountByAccountId(accountId));
+  }
+
   @PostMapping()
   public ResponseEntity<Account> createAccount(@RequestBody Account account){
     return ResponseEntity.ok(accountService.createOrUpdateAccount(account, true));
